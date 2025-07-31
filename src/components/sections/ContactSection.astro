@@ -1,0 +1,308 @@
+---
+---
+<section class="contact-section">
+  <div class="container">
+    <div class="heading-container">
+      <h2 class="section-title">Свяжитесь с нами</h2>
+      <p class="section-subtitle">Остались вопросы? Наши специалисты готовы ответить на них и помочь вам с выбором автомобиля мечты.</p>
+    </div>
+    <div class="content-wrapper">
+      <div class="form-container">
+        <h3 class="form-title">Напишите нам</h3>
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="name">Ваше имя</label>
+            <input type="text" id="name" placeholder="Иван Иванов">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="example@mail.ru">
+          </div>
+          <div class="form-group">
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" placeholder="+7 (___) ___-__-__">
+          </div>
+          <div class="form-group">
+            <label for="message">Сообщение</label>
+            <textarea id="message" placeholder="Ваш вопрос или комментарий"></textarea>
+          </div>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="agreement">
+            <label for="agreement">Я согласен на обработку персональных данных</label>
+          </div>
+          <button type="submit" class="submit-button">Отправить сообщение</button>
+        </form>
+      </div>
+      <div class="info-container">
+        <div class="info-block">
+          <h3 class="info-title">Контактная информация</h3>
+          <div class="info-item">
+            <img src="/images/icons/location.svg" alt="Адрес" />
+            <div>
+              <h4>Адрес</h4>
+              <p>Москва, ул. Василисы Кожиной, 13</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <img src="/images/icons/phone.svg" alt="Телефон" />
+            <div>
+              <h4>Телефон</h4>
+              <p>+7 (495) 123-45-67</p>
+            </div>
+          </div>
+          <div class="info-item">
+             <img src="/images/icons/email.svg" alt="Email" />
+            <div>
+              <h4>Email</h4>
+              <p>info@premiumauto.ru</p>
+            </div>
+          </div>
+           <div class="info-item">
+            <img src="/images/icons/clock.svg" alt="Режим работы" />
+            <div>
+              <h4>Режим работы</h4>
+              <p>Пн-Пт: 9:00 - 20:00<br>Сб: 10:00 - 18:00<br>Вс: 10:00 - 16:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="social-block">
+          <h4 class="social-title">Мы в социальных сетях</h4>
+          <div class="social-links">
+            <a href="#"><img src="/images/icons/telegram.svg" alt="Telegram"></a>
+            <a href="#"><img src="/images/icons/whatsapp.svg" alt="WhatsApp"></a>
+            <a href="#"><img src="/images/icons/vk.svg" alt="VK"></a>
+            <a href="#"><img src="/images/icons/instagram.svg" alt="Instagram"></a>
+            <a href="#"><img src="/images/icons/youtube.svg" alt="YouTube"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .contact-section {
+    padding-top: clamp(3.75rem, 0.9375rem + 7.5vw, 7.5rem); /* 60-120px */
+    padding-bottom: clamp(3.75rem, 0.9375rem + 7.5vw, 7.5rem); /* 60-120px */
+    background: linear-gradient(180deg, #000 0%, #E6512E 100%);
+  }
+
+  .container {
+    max-width: var(--screen-max);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, -0.625rem + 5vw, 3.75rem); /* 20-60px */
+  }
+
+  .heading-container {
+    text-align: center;
+    max-width: 48rem; /* 768px */
+    margin: 0 auto;
+    margin-bottom: clamp(2.5rem, 1.25rem + 3.33vw, 4.125rem); /* 40-66px */
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 1.0938rem + 1.75vw, 2.625rem); /* 28-42px */
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: clamp(1rem, 0.5rem + 1.33vw, 1.625rem); /* 16-26px */
+  }
+
+  .section-subtitle {
+    font-size: clamp(1rem, 0.8125rem + 0.5vw, 1.25rem); /* 16-20px */
+    line-height: 1.5;
+    color: #D1D5DB;
+  }
+
+  .content-wrapper {
+    display: flex;
+    gap: clamp(1.5rem, -0.75rem + 6vw, 4.5rem); /* 24-72px */
+    padding: clamp(1.5rem, 0.5rem + 2.67vw, 2.8125rem) clamp(1.5rem, -0.375rem + 5vw, 4rem); /* 24-45px / 24-64px */
+    background: rgba(56, 40, 31, 0.4);
+    backdrop-filter: blur(231px);
+    border-radius: 8px;
+  }
+
+  .form-container {
+    flex: 1;
+  }
+
+  .form-title {
+    font-size: clamp(1.25rem, 0.9375rem + 0.83vw, 1.6875rem); /* 20-27px */
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 0.625rem + 1vw, 1.5rem); /* 16-24px */
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group label {
+    font-size: clamp(0.8125rem, 0.7188rem + 0.25vw, 0.9375rem); /* 13-15px */
+    color: #fff;
+  }
+
+  .contact-form input[type="text"],
+  .contact-form input[type="email"],
+  .contact-form input[type="tel"],
+  .contact-form textarea {
+    background: rgba(116, 84, 66, 0.5);
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    color: #fff;
+    font-size: clamp(0.875rem, 0.7813rem + 0.25vw, 1rem); /* 14-16px */
+  }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: #AEAEAE;
+  }
+
+  .contact-form textarea {
+    min-height: 128px;
+    resize: vertical;
+  }
+
+  .checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #E6512E;
+  }
+
+  .submit-button {
+    padding: 12px;
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    color: #fff;
+    font-size: clamp(0.875rem, 0.7813rem + 0.25vw, 1rem);
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+
+  .submit-button:hover {
+    background: #E6512E;
+    border-color: #E6512E;
+  }
+
+  .info-container {
+    flex: 0 0 40%;
+    max-width: 463px;
+  }
+
+  .info-title {
+    font-size: clamp(1.25rem, 0.9375rem + 0.83vw, 1.6875rem); /* 20-27px */
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+
+  .info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .info-item img {
+    width: 16px;
+    height: 16px;
+    margin-top: 4px;
+  }
+
+  .info-item h4 {
+    font-size: clamp(0.9375rem, 0.8438rem + 0.25vw, 1.0625rem); /* 15-17px */
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .info-item p {
+    font-size: clamp(0.875rem, 0.7813rem + 0.25vw, 1rem); /* 14-16px */
+    color: #fff;
+    line-height: 1.5;
+  }
+
+  .social-title {
+    font-size: clamp(0.9375rem, 0.8438rem + 0.25vw, 1.0625rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 16px;
+  }
+
+  .social-links a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: #E6512E;
+    border-radius: 50%;
+    transition: transform 0.3s;
+  }
+  
+  .social-links a:hover {
+      transform: scale(1.1);
+  }
+
+  .social-links img {
+    height: clamp(0.875rem, 0.75rem + 0.33vw, 1.0625rem); /* 14-17px */
+  }
+
+  /* Responsive Adjustments */
+  @media (min-width: 960px) {
+    .container {
+      /* 
+        This dynamically calculates padding to match the form width to the design: 
+        - 1263px width on a 1920px screen.
+        - 631.42px width on a 960px screen.
+      */
+      padding: 0 clamp(10.27rem, 17.11vw, 20.54rem);
+    }
+  }
+
+  @media (max-width: 960px) {
+    .content-wrapper {
+      flex-direction: column;
+    }
+    .info-container {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .content-wrapper {
+      flex-direction: column-reverse;
+    }
+    .info-block {
+      display: none;
+    }
+  }
+
+</style> 

@@ -1,0 +1,125 @@
+---
+// src/components/sections/ServicesSection.astro
+---
+<section id="services">
+  <div class="container">
+    <h2 class="title">Наши услуги</h2>
+    <p class="subtitle">
+      Мы предлагаем полный спектр услуг для владельцев премиальных автомобилей, от финансирования до технического обслуживания.
+    </p>
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="/images/service-icon-1.svg" alt="Финансирование" class="service-icon" />
+        <h3 class="service-title">Финансирование</h3>
+        <p class="service-description">
+          Индивидуальные условия<br />кредитования и лизинга
+        </p>
+      </div>
+      <div class="service-card">
+        <img src="/images/service-icon-2.svg" alt="Trade-in" class="service-icon" />
+        <h3 class="service-title">Trade-in</h3>
+        <p class="service-description">
+          Обмен вашего автомобиля с<br />выгодной доплатой
+        </p>
+      </div>
+      <div class="service-card">
+        <img src="/images/service-icon-3.svg" alt="Выкуп" class="service-icon" />
+        <h3 class="service-title">Выкуп</h3>
+        <p class="service-description">
+          Выкуп Вашего автомобиля<br />быстро и прозрачно
+        </p>
+      </div>
+      <div class="service-card">
+        <img src="/images/service-icon-4.svg" alt="Продажа" class="service-icon" />
+        <h3 class="service-title">Продажа</h3>
+        <p class="service-description">
+          Комиссионная продажа<br />вашего автомобиля
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --screen-min: 340;
+    --screen-mid-low: 640;
+    --screen-mid-high: 960;
+    --screen-max: 1920;
+  }
+
+  #services {
+    background: linear-gradient(180deg, #2D1608 0%, #000000 100%);
+    padding: clamp(40px, 5.2vw, 100px) clamp(20px, 5.2vw, 100px);
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 1480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title {
+    font-weight: 700;
+    line-height: 1.13;
+    font-size: clamp(23.58px, 1.85vw, 35.3px);
+    margin-bottom: clamp(15px, 1.56vw, 30px);
+  }
+
+  .subtitle {
+    color: #D1D5DB;
+    line-height: 1.33;
+    max-width: 1091px;
+    font-size: clamp(13.25px, 1.56vw, 30px);
+    margin-bottom: clamp(20px, 3.38vw, 65px);
+  }
+
+  .services-grid {
+    display: grid;
+    width: 100%;
+    gap: clamp(10px, 1.04vw, 20px);
+    grid-template-columns: repeat(1, 1fr); /* 1. Default to 1 column for mobile */
+  }
+
+  @media (min-width: 400px) { /* 2. Switch to 2 columns for tablets */
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 960px) { /* 3. Switch to 4 columns for desktops */
+    .services-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(12px, 1.6vw, 31px);
+    padding: clamp(16px, 1.9vw, 37px) clamp(6px, 2.3vw, 45px);
+  }
+
+  .service-icon {
+    width: clamp(33.76px, 2.18vw, 42px);
+    height: auto;
+  }
+
+  .service-title {
+    font-weight: 700;
+    line-height: 1.4;
+    font-size: clamp(17.79px, 1.23vw, 23.61px);
+  }
+
+  .service-description {
+    color: #D1D5DB;
+    line-height: 1.42;
+    font-size: clamp(9.99px, 1.04vw, 20px);
+  }
+</style> 

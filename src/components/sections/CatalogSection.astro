@@ -1,0 +1,202 @@
+---
+// src/components/sections/CatalogSection.astro
+import CarCard from '../ui/CarCard.astro';
+import type { Props as CarCardProps } from '../ui/CarCard.astro';
+
+let cars: CarCardProps['car'][] = [];
+try {
+  const response = await fetch('http://83.222.17.127/:3001/cars');
+  if (response.ok) {
+    cars = await response.json();
+  } else {
+    console.error(`Failed to fetch cars: ${response.status}`);
+  }
+} catch (error: any) {
+  console.error('Error fetching cars:', error.message);
+}
+
+const brands = ["Все автомобили", "Mercedes-Benz", "BMW", "Audi", "Porsche", "Ferrari"];
+---
+
+<section id="catalog" class="catalog-section">
+  <div class="catalog-header">
+    <h2>Наш каталог</h2>
+    <p>Откройте для себя коллекцию эксклюзивных автомобилей премиум класса, тщательно отобранных для истинных ценителей престижа и качества.</p>
+  </div>
+  <div class="catalog-filters">
+    {brands.map((brand, index) => (
+      <button class={`filter-button ${index === 0 ? 'active' : ''}`} data-brand={brand === 'Все автомобили' ? 'all' : brand}>
+        {brand}
+      </button>
+    ))}
+  </div>
+  <div id="car-grid" class="car-grid">
+    {cars.length > 0 ? (
+      cars.map(car => <CarCard car={car} />)
+    ) : (
+      <p class="error-message">Не удалось загрузить каталог. Пожалуйста, убедитесь, что API сервер запущен (npm run api) и попробуйте снова.</p>
+    )}
+  </div>
+  <button class="view-all-button">Смотреть все автомобили</button>
+</section>
+
+<script>
+  interface Car {
+    id: number;
+    brand: string;
+    model: string;
+    year: number;
+    mileage: string;
+    engineVolume: string;
+    horsePower: string;
+    fuelType: string;
+    price: string;
+    oldPrice?: string;
+    imageUrl: string;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const carCards = document.querySelectorAll<HTMLElement>('.car-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const selectedBrand = button.getAttribute('data-brand');
+
+        carCards.forEach(card => {
+          const cardBrand = card.getAttribute('data-brand');
+          if (selectedBrand === 'all' || selectedBrand === cardBrand) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .catalog-section {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, #000 0%, #2D1608 100%);
+    padding-top: clamp(40px, 7.81vw, 150px);
+    padding-bottom: clamp(40px, 4.17vw, 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(30px, 3.13vw, 60px);
+  }
+
+  .catalog-header {
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 0.83vw, 16px);
+    max-width: 1252px;
+    padding: 0 20px;
+  }
+
+  .catalog-header h2 {
+    font-weight: 700;
+    font-size: clamp(17.36px, 1.81vw, 34.73px);
+    line-height: 1.15;
+  }
+
+  .catalog-header p {
+    font-weight: 400;
+    font-size: clamp(15px, 1.56vw, 30px);
+    line-height: 1.33;
+    color: #D1D5DB;
+  }
+
+  .catalog-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(10px, 0.96vw, 18.39px);
+    padding: 0 20px;
+  }
+
+  .filter-button {
+    background-color: #38281F;
+    color: #fff;
+    border: none;
+    border-radius: clamp(2.3px, 0.24vw, 4.6px);
+    padding: clamp(12px, 0.62vw, 23px) clamp(13px, 1.33vw, 25.58px);
+    font-weight: 600;
+    font-size: clamp(8.7px, 0.91vw, 17.38px);
+    line-height: 1.59;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .filter-button.active {
+    background-color: #E6512E;
+  }
+
+  .car-grid {
+    width: 100%;
+    max-width: 1536px; /* (4 * 317.73) + (3 * 31.77) - Prevents stretching on ultra-wide screens */
+    display: flex;
+    overflow-x: auto;
+    gap: clamp(20px, 1.65vw, 31.77px);
+    padding: 0 20px;
+    
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+  }
+  .car-grid::-webkit-scrollbar { /* WebKit */
+    display: none;
+  }
+
+  .error-message {
+    color: white;
+    width: 100%;
+    text-align: center;
+  }
+
+  .view-all-button {
+    background-color: #E6512E;
+    color: #fff;
+    border: none;
+    border-radius: clamp(2px, 0.21vw, 4px);
+    width: clamp(142.07px, 14.8vw, 284.17px);
+    height: clamp(26px, 2.71vw, 52px);
+    font-weight: 400;
+    font-size: clamp(8.44px, 0.88vw, 16.88px);
+    line-height: 1.66;
+    cursor: pointer;
+  }
+
+  @media (min-width: 960px) {
+    .catalog-header, .catalog-filters {
+      padding: 0 clamp(20px, 10vw, 192px);
+    }
+    .car-grid {
+      padding: 0 clamp(20px, 10vw, 192px);
+    }
+  }
+
+  @media (max-width: 490px) {
+    .catalog-filters {
+      width: 100%;
+      justify-content: flex-start;
+      flex-wrap: nowrap; /* Prevent wrapping */
+      overflow-x: auto;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* IE 10+ */
+    }
+    .catalog-filters::-webkit-scrollbar { /* WebKit */
+      display: none;
+    }
+    .filter-button {
+      flex-shrink: 0; /* Prevent buttons from shrinking */
+    }
+  }
+</style> 

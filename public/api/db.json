@@ -1,0 +1,142 @@
+{
+  "cars": [
+    {
+      "id": 1,
+      "brand": "BMW",
+      "model": "M4 G80",
+      "year": 2025,
+      "mileage": "15 500 км",
+      "engineVolume": "3 л.",
+      "horsePower": "480 л.с",
+      "fuelType": "Бензин",
+      "price": "10 900 000 ₽",
+      "oldPrice": "",
+      "imageUrl": "/images/cars/bmw-m4-g80.png"
+    },
+    {
+      "id": 2,
+      "brand": "Rolls Royce",
+      "model": "Ghost",
+      "year": 2025,
+      "mileage": "15 500 км",
+      "engineVolume": "6 л.",
+      "horsePower": "580 л.с",
+      "fuelType": "Бензин",
+      "price": "20 850 000 ₽",
+      "oldPrice": "",
+      "imageUrl": "/images/cars/rolls-royce-ghost.png"
+    },
+    {
+      "id": 3,
+      "brand": "Porsche",
+      "model": "911 Turbo S",
+      "year": 2025,
+      "mileage": "15 500 км",
+      "engineVolume": "3 л.",
+      "horsePower": "620 л.с",
+      "fuelType": "Бензин",
+      "price": "18 100 000 ₽",
+      "oldPrice": "",
+      "imageUrl": "/images/cars/porsche-911-turbo-s.png"
+    },
+    {
+      "id": 4,
+      "brand": "BMW",
+      "model": "M4 G80",
+      "year": 2025,
+      "mileage": "15 500 км",
+      "engineVolume": "3 л.",
+      "horsePower": "480 л.с",
+      "fuelType": "Бензин",
+      "price": "10 900 000 ₽",
+      "oldPrice": "",
+      "imageUrl": "/images/cars/bmw-m4-g80.png"
+    }
+  ],
+  "services": [
+    {
+      "id": "financing",
+      "title": "Финансирование",
+      "description": "Индивидуальные условия кредитования и лизинга",
+      "icon": "credit-card",
+      "features": [
+        "Кредит от 0.1% годовых",
+        "Лизинг без первоначального взноса",
+        "Быстрое одобрение за 30 минут",
+        "Индивидуальные условия"
+      ]
+    },
+    {
+      "id": "trade-in",
+      "title": "Trade-in",
+      "description": "Обмен вашего автомобиля с выгодной доплатой",
+      "icon": "refresh-cw",
+      "features": [
+        "Оценка автомобиля за 15 минут",
+        "Максимальная выгода от обмена",
+        "Юридическое сопровождение",
+        "Все документы под ключ"
+      ]
+    },
+    {
+      "id": "buyout",
+      "title": "Выкуп",
+      "description": "Выкуп вашего автомобиля быстро и дорого",
+      "icon": "car",
+      "features": [
+        "Оценка за 15 минут",
+        "Выкуп в любом состоянии",
+        "Расчет в день обращения",
+        "Оформление документов"
+      ]
+    },
+    {
+      "id": "sale",
+      "title": "Продажа",
+      "description": "Комиссионная продажа вашего автомобиля",
+      "icon": "handshake",
+      "features": [
+        "Профессиональная подготовка",
+        "Маркетинг и реклама",
+        "Показы клиентам",
+        "Юридическое сопровождение"
+      ]
+    }
+  ],
+  "partners": [
+    {
+      "id": "binance",
+      "name": "Binance",
+      "logo": "/images/partners/binance.svg"
+    },
+    {
+      "id": "opl",
+      "name": "OPL",
+      "logo": "/images/partners/opl.svg"
+    },
+    {
+      "id": "kaspersky",
+      "name": "Kaspersky",
+      "logo": "/images/partners/kaspersky.svg"
+    }
+  ],
+  "location": {
+    "address": "Москва, ул. Выставочная, 13",
+    "coordinates": {
+      "lat": 55.751244,
+      "lng": 37.618423
+    },
+    "workingHours": {
+      "Понедельник": "09:00 - 21:00",
+      "Вторник": "09:00 - 21:00",
+      "Среда": "09:00 - 21:00",
+      "Четверг": "09:00 - 21:00",
+      "Пятница": "09:00 - 21:00",
+      "Суббота": "10:00 - 19:00",
+      "Воскресенье": "10:00 - 19:00"
+    },
+    "phone": "+7 (499) 112-82-87",
+    "email": "info@chistyivykup.ru"
+  },
+  "contacts": []
+} 

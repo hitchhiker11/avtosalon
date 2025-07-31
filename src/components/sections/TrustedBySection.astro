@@ -1,0 +1,342 @@
+---
+// src/components/sections/TrustedBySection.astro
+const partners = [
+  { name: 'Binance', logo: '/images/partners/binance.svg' },
+  { name: 'Oldi', logo: '/images/partners/oldi.svg' },
+  { name: 'Kaspersky', logo: '/images/partners/kaspersky.svg' },
+  { name: 'Oldi', logo: '/images/partners/oldi2.svg' },
+  { name: 'Binance', logo: '/images/partners/binance.svg' },
+  { name: 'Oldi', logo: '/images/partners/oldi.svg' },
+  { name: 'Kaspersky', logo: '/images/partners/kaspersky.svg' },
+  { name: 'Oldi', logo: '/images/partners/oldi2.svg' },
+];
+---
+
+<section id="trusted-by">
+  <div class="container">
+    <div class="text-card-wrapper">
+      <div class="text-card">
+        <img src="/images/trusted-by.png" alt="Кто нам доверяет" class="card-image"/>
+      </div>
+    </div>
+
+    <div class="slider-section">
+      <div class="slider-container" id="partner-slider">
+        <div class="slider-track">
+          {partners.map(partner => (
+            <div class="slide">
+              <div class="partner-card">
+                <div class="logo-container">
+                  <img src={partner.logo} alt={partner.name} class="partner-logo" />
+                </div>
+                <div class="partner-info">
+                  <h3 class="partner-name">{partner.name}</h3>
+                  <p class="partner-description">
+                    {partner.name === 'Binance' 
+                      ? 'Блокчейн-система и поставщик инфраструктуры для криптовалютной отрасли с комплексом продуктов.' 
+                      : 'TOKENBAR is the world’s leading NFT’s game service where you can try your luck, win and get NFT’s'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="slider-scrollbar">
+        <div class="slider-scrollbar-thumb" id="scrollbar-thumb"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --screen-min: 340;
+    --screen-mid-low: 640;
+    --screen-mid-high: 960;
+    --screen-max: 1920;
+    --screen-vertical-breakpoint: 500;
+
+    /* Left Card Sizing */
+    --left-card-width-rate-1920-960: calc((663 - 341.46) / (var(--screen-max) - var(--screen-mid-high)));
+    --left-card-height-rate-1920-960: calc((1063 - 531.43) / (var(--screen-max) - var(--screen-mid-high)));
+    --left-card-width-1920-960: calc(341.46px + var(--left-card-width-rate-1920-960) * (100vw - var(--screen-mid-high) * 1px));
+    --left-card-height-1920-960: calc(531.43px + var(--left-card-height-rate-1920-960) * (100vw - var(--screen-mid-high) * 1px));
+
+    --left-card-width-rate-960-640: calc((341.46 - 249.69) / (var(--screen-mid-high) - var(--screen-mid-low)));
+    --left-card-height-rate-960-640: calc((531.43 - 388.61) / (var(--screen-mid-high) - var(--screen-mid-low)));
+    --left-card-width-960-640: calc(249.69px + var(--left-card-width-rate-960-640) * (100vw - var(--screen-mid-low) * 1px));
+    --left-card-height-960-640: calc(388.61px + var(--left-card-height-rate-960-640) * (100vw - var(--screen-mid-low) * 1px));
+
+    /* Partner Card Sizing (assuming it should match the left card's horizontal behavior but maintain its own vertical logic) */
+    --partner-card-width-rate-1920-960: calc((453.7 - 226.82) / (var(--screen-max) - var(--screen-mid-high)));
+    --partner-card-height-rate-1920-960: calc((595.48 - 297.7) / (var(--screen-max) - var(--screen-mid-high)));
+    --partner-card-width-1920-960: calc(226.82px + var(--partner-card-width-rate-1920-960) * (100vw - var(--screen-mid-high) * 1px));
+    --partner-card-height-1920-960: calc(297.7px + var(--partner-card-height-rate-1920-960) * (100vw - var(--screen-mid-high) * 1px));
+
+    --partner-card-width-rate-960-640: calc((226.82 - 164.37) / (var(--screen-mid-high) - var(--screen-mid-low)));
+    --partner-card-height-rate-960-640: calc((297.7 - 215.74) / (var(--screen-mid-high) - var(--screen-mid-low)));
+    --partner-card-width-960-640: calc(164.37px + var(--partner-card-width-rate-960-640) * (100vw - var(--screen-mid-low) * 1px));
+    --partner-card-height-960-640: calc(215.74px + var(--partner-card-height-rate-960-640) * (100vw - var(--screen-mid-low) * 1px));
+  }
+
+  #trusted-by {
+    background: #000;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    padding: clamp(60px, 7.8125vw, 150px) 0;
+    overflow: hidden;
+  }
+
+  .container {
+    max-width: 1920px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 2.91vw, 56px); /* 20px at 640, 56px at 1920 */
+    padding: 0;
+  }
+
+  /* Для экранов больше 1920px */
+  @media (min-width: 1920px) {
+    .container {
+      max-width: none;
+      justify-content: flex-start;
+      padding-left: 0;
+      margin-left: 0;
+    }
+    
+    .text-card-wrapper {
+      flex-shrink: 0;
+      padding-left: 0;
+    }
+    
+    .slider-section {
+      flex-grow: 0;
+      flex-shrink: 1;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: calc(1920px - 663px - 56px); /* Ограничиваем ширину слайдера */
+    }
+  }
+
+  .text-card-wrapper {
+    flex-shrink: 0;
+    padding-left: 0; /* Прижимаем к левому краю */
+    perspective: 1000px; /* Восстанавливаем перспективу для 3D-поворота */
+  }
+
+  .text-card {
+    position: relative;
+    left: 0;
+    overflow: hidden; /* Обрезаем выходящие за границы части */
+    transform: rotateY(10deg); /* Восстанавливаем поворот */
+    transform-origin: left center; /* Поворот относительно левого края */
+  }
+
+  /*
+    !!! ВАЖНО !!!
+    Проблема с белым пространством вокруг карточки вызвана форматом файла изображения.
+    Текущий файл '/images/trusted-by.jpg' имеет белый фон, который невозможно убрать
+    с помощью CSS, так как формат .jpg не поддерживает прозрачность.
+  */
+  .card-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: left; /* Возвращаем left для правильного отображения с поворотом */
+  }
+
+  .title, .description { display: none; }
+
+  .slider-section {
+    flex-grow: 1;
+    min-width: 0;
+    /* padding-right: clamp(20px, 10.41vw, 200px); */
+  }
+
+  .slider-container {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .slider-container::-webkit-scrollbar { display: none; }
+
+  .slider-track {
+    display: flex;
+    gap: clamp(20px, 2.08vw, 40px);
+    padding-bottom: 20px;
+  }
+
+  .slide { flex-shrink: 0; }
+
+  .partner-card {
+    padding: clamp(30px, 2.95vw, 56.71px);
+    box-sizing: border-box;
+    /* border-radius: 12px; */
+    display: flex;
+    flex-direction: column;
+    gap: clamp(90px, 1.25vw, 24px);
+    color: #fff;
+    overflow: hidden; /* Избегаем скролла */
+  }
+  
+  .slide:nth-child(odd) .partner-card {
+    background: radial-gradient(circle at 92.72% 9.51%, #E6512E, rgba(230, 81, 46, 0) 50%);
+  }
+
+  .slide:nth-child(even) .partner-card {
+    background: radial-gradient(circle at 92.72% 9.51%, #523F34, rgba(82, 63, 52, 0) 50%);
+  }
+
+  .logo-container { height: clamp(40px, 4.16vw, 80px); display: flex; align-items: center; }
+  .partner-logo { max-height: 100%; width: auto; }
+  .partner-name { font-size: clamp(10.27px, 1.8vw, 28.36px); font-weight: 700; text-transform: uppercase; line-height: 1.4; }
+  .partner-description { font-size: clamp(6.68px, 1.2vw, 18.43px); line-height: 1.6; color: #e5e7eb; letter-spacing: 0.02em; }
+
+  .slider-scrollbar { width: 100%; height: 8px; background-color: #38281F; border-radius: 4px; margin-top: clamp(20px, 2.08vw, 40px); }
+  .slider-scrollbar-thumb { height: 100%; background-color: #E6512E; border-radius: 4px; position: relative; left: 0; }
+
+  /* SIZING LOGIC */
+  
+  /* Default for >= 1920px */
+  .text-card { width: 663px; height: 1063px; }
+  .partner-card { width: 453.7px; height: 595.48px; }
+
+  /* Screens from 960px to 1919.98px */
+  @media (min-width: 960px) and (max-width: 1919.98px) {
+    .text-card {
+      width: var(--left-card-width-1920-960);
+      height: var(--left-card-height-1920-960);
+    }
+    .partner-card {
+      width: var(--partner-card-width-1920-960);
+      height: var(--partner-card-height-1920-960);
+    }
+  }
+
+  /* Screens from 500px to 959.98px */
+  @media (min-width: 500px) and (max-width: 959.98px) {
+    .text-card {
+      width: var(--left-card-width-960-640);
+      height: var(--left-card-height-960-640);
+    }
+     .partner-card {
+      width: var(--partner-card-width-960-640);
+      height: var(--partner-card-height-960-640);
+    }
+  }
+
+  /* Screens below 500px - Vertical Layout */
+  @media (max-width: 499.98px) {
+    .container {
+      flex-direction: column;
+      align-items: stretch; 
+      gap: 30px;
+      padding: 0; 
+    }
+    .text-card-wrapper {
+        /* padding: 0 20px; */
+        margin-bottom: 0;
+    }
+    .text-card {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 340 / 529.17; 
+    }
+    .slider-section {
+        padding: 0;
+        width: 100%;
+        overflow: hidden;
+    }
+    .slider-container {
+        padding-left: 20px;
+        padding-right: 20px;
+        /* Remove margin-left/right to prevent horizontal scroll */
+        margin-left: 0; 
+        margin-right: 0;
+    }
+    .slider-track {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .partner-card {
+        width: 226.93px;
+        height: 297.85px;
+    }
+    .partner-name {
+      font-size: clamp(14.18px, 4.17vw, 19.48px);
+    }
+    .partner-description {
+      font-size: clamp(9.21px, 2.71vw, 12.66px);
+    }
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('partner-slider');
+    const thumb = document.getElementById('scrollbar-thumb') as HTMLDivElement | null;
+    const scrollbar = thumb?.parentElement;
+
+    if (!slider || !thumb || !scrollbar) return;
+
+    let isDragging = false;
+    let startX: number;
+    let scrollLeft: number;
+
+    const updateThumb = () => {
+      const scrollableWidth = slider.scrollWidth - slider.clientWidth;
+      const thumbWidth = (slider.clientWidth / slider.scrollWidth) * 100;
+
+      if (scrollableWidth <= 0) {
+        scrollbar.style.display = 'none';
+        return;
+      }
+      
+      scrollbar.style.display = 'block';
+      const thumbPosition = (slider.scrollLeft / scrollableWidth) * (100 - thumbWidth);
+
+      thumb.style.width = `${thumbWidth}%`;
+      thumb.style.left = `${thumbPosition}%`;
+    };
+
+    slider.addEventListener('scroll', updateThumb, { passive: true });
+    window.addEventListener('resize', updateThumb);
+    
+    const observer = new MutationObserver(updateThumb);
+    const sliderTrack = slider.querySelector('.slider-track');
+    if(sliderTrack) {
+      observer.observe(sliderTrack, { childList: true });
+    }
+    
+    updateThumb();
+
+    slider.addEventListener('mousedown', (e: MouseEvent) => {
+      isDragging = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+      slider.style.cursor = 'grabbing';
+    });
+
+    slider.addEventListener('mouseleave', () => {
+      isDragging = false;
+      slider.style.cursor = 'grab';
+    });
+
+    slider.addEventListener('mouseup', () => {
+      isDragging = false;
+      slider.style.cursor = 'grab';
+    });
+
+    slider.addEventListener('mousemove', (e: MouseEvent) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 2;
+      slider.scrollLeft = scrollLeft - walk;
+    });
+    
+    slider.style.cursor = 'grab';
+  });
+</script>

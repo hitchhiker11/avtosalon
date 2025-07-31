@@ -1,0 +1,383 @@
+---
+// src/components/sections/HeroSection.astro
+---
+<section id="hero" class="relative w-full overflow-hidden">
+  <!-- Background Image and Gradient -->
+  <div class="absolute inset-0 z-0">
+    <picture>
+      <!-- Desktop Wide (1920px) -->
+      <source
+        media="(min-width: 1920px)"
+        srcset="/images/hero-car.png"
+      />
+      <!-- Desktop (960px) -->
+      <source
+        media="(min-width: 960px)"
+        srcset="/images/hero-car.png"
+      />
+      <!-- Tablet (640px) -->
+      <source
+        media="(min-width: 640px)"
+        srcset="/images/hero-car.png"
+      />
+      <!-- Mobile (340px) -->
+      <source
+        media="(min-width: 320px)"
+        srcset="/images/hero-car.png"
+      />
+      <img
+        src="/images/hero-car.png"
+        alt="Premium car"
+        class="hero-image"
+      />
+    </picture>
+    <div class="absolute inset-0 hero-gradient"></div>
+  </div>
+
+  <!-- Content Container -->
+  <div class="relative z-10 h-full">
+    <div class="hero-content-container">
+      <div class="hero-text-content">
+        <h1 class="hero-heading">Воплощение престижа</h1>
+        <p class="hero-description">
+          Откройте для себя коллекцию автомобилей<br />премиум-класса
+        </p>
+        <button class="hero-button">Смотреть каталог</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <!-- <div class="hero-navigation">
+    <button class="hero-arrow hero-arrow-left">‹</button>
+    <button class="hero-arrow hero-arrow-right">›</button>
+  </div> -->
+
+  <!-- Pagination -->
+  <div class="hero-pagination">
+    <div class="hero-dot"></div>
+    <div class="hero-dot active"></div>
+    <div class="hero-dot"></div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="hero-scroll-indicator" id="hero-scroll-indicator">
+    <p>Прокрутите вниз</p>
+    <div class="scroll-line">
+      <div class="scroll-line-inner"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const arrows = document.querySelectorAll(".hero-arrow");
+    const dots = document.querySelectorAll(".hero-dot");
+    const scrollIndicator = document.getElementById("hero-scroll-indicator");
+
+    let currentSlide = 1;
+    const totalSlides = 3;
+
+    function updateSlider() {
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === currentSlide - 1);
+      });
+    }
+
+    function showNextSlide() {
+      currentSlide = currentSlide >= totalSlides ? 1 : currentSlide + 1;
+      updateSlider();
+    }
+
+    function showPrevSlide() {
+      currentSlide = currentSlide <= 1 ? totalSlides : currentSlide - 1;
+      updateSlider();
+    }
+
+    arrows.forEach((arrow) => {
+      arrow.addEventListener("click", () => {
+        if (arrow.classList.contains("hero-arrow-right")) {
+          showNextSlide();
+        } else {
+          showPrevSlide();
+        }
+      });
+    });
+
+    setInterval(showNextSlide, 5000);
+
+  });
+</script>
+
+<style>
+  :root {
+    --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+    /* Define interpolation start/end points for clarity (unitless for calculations) */
+    --screen-min: 320;
+    --screen-mid-low: 640;
+    --screen-mid-high: 960;
+    --screen-max: 1920;
+    /* Synchronized header height calculation */
+    --header-height: 64px;
+    --header-z-index: 30;
+    --sidebar-z-index: 100; /* Example: adjust to match your sidebar z-index */
+  }
+  @media (min-width: 960px) {
+    :root {
+      --header-height: clamp(64px, calc(48px + 1.667vw), 80px);
+    }
+  }
+
+  #hero {
+    background-color: #000;
+    font-family: 'Inter', sans-serif;
+    margin-top: var(--header-height);
+  }
+
+  /* Responsive height based on breakpoints */
+  @media (min-width: 960px) {
+    #hero {
+      --height-rate: calc((1200 - 600) / (var(--screen-max) - var(--screen-mid-high)));
+      height: calc(600px + var(--height-rate) * (100vw - var(--screen-mid-high) * 1px));
+    }
+  }
+  @media (min-width: 640px) and (max-width: 959px) {
+    #hero {
+      --height-rate: calc((600 - 440) / (var(--screen-mid-high) - var(--screen-mid-low)));
+      height: calc(440px + var(--height-rate) * (100vw - var(--screen-mid-low) * 1px));
+    }
+  }
+  @media (max-width: 639px) {
+    #hero {
+      --height-rate: calc((440 - 369) / (var(--screen-mid-low) - var(--screen-min)));
+      height: calc(369px + var(--height-rate) * (100vw - var(--screen-min) * 1px));
+    }
+  }
+  
+  /* The dynamic gap logic below is no longer needed */
+  /*
+  @media (min-width: 1280px) {
+    #hero {
+      --extra-gap: clamp(0px, calc(60px - 3.125vw), 20px);
+      margin-top: calc(var(--header-height) + var(--extra-gap));
+    }
+  }
+  */
+
+  /* Apply a consistent transition to all animated elements */
+  .hero-image,
+  .hero-content-container,
+  .hero-text-content,
+  .hero-heading,
+  .hero-description,
+  .hero-button,
+  .hero-arrow,
+  .hero-pagination,
+  .hero-dot,
+  .hero-scroll-indicator {
+    transition: all 0.3s var(--ease-out-quart);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(90deg, #000 0%, #0000 19.23%, #0000 70.19%, #000 100%);
+  }
+
+  /* --- Fluid Image Positioning --- */
+  .hero-image {
+    position: absolute;
+    object-fit: cover;
+    --width-rate: calc((1663 - 300) / (var(--screen-max) - var(--screen-min)));
+    --height-rate: calc((1052 - 190) / (var(--screen-max) - var(--screen-min)));
+    --left-rate: calc((128 - 20) / (var(--screen-max) - var(--screen-min)));
+    --top-rate: calc((53 - 131) / (var(--screen-max) - var(--screen-min)));
+    
+    width: calc(300px + var(--width-rate) * (100vw - var(--screen-min) * 1px));
+    height: calc(190px + var(--height-rate) * (100vw - var(--screen-min) * 1px));
+    left: calc(20px + var(--left-rate) * (100vw - var(--screen-min) * 1px));
+    top: calc(131px + var(--top-rate) * (100vw - var(--screen-min) * 1px));
+  }
+
+  /* --- Fluid Content Positioning --- */
+  .hero-content-container {
+    position: absolute;
+    --top-rate: calc((30 - 23) / (var(--screen-max) - var(--screen-min)));
+    top: calc(23px + var(--top-rate) * (100vw - var(--screen-min) * 1px));
+    
+    /* Size interpolation */
+    --width-rate: calc((1021 - 297) / (var(--screen-max) - var(--screen-min)));
+    --height-rate: calc((389 - 117) / (var(--screen-max) - var(--screen-min)));
+    width: calc(297px + var(--width-rate) * (100vw - var(--screen-min) * 1px));
+    height: calc(117px + var(--height-rate) * (100vw - var(--screen-min) * 1px));
+
+    /* Remove horizontal padding and control position with `left` only */
+    padding: clamp(24px, 4vw, 53px) 0;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Left positioning with smooth interpolation from 200px to 100px to 20px */
+  @media (min-width: 960px) {
+    .hero-content-container {
+      /* Smooth interpolation from 200px (1920px) to 100px (960px) */
+      --left-rate: calc((200 - 100) / (var(--screen-max) - var(--screen-mid-high)));
+      left: calc(100px + var(--left-rate) * (100vw - var(--screen-mid-high) * 1px));
+      /* 1. Remove background and border */
+      background: transparent;
+      backdrop-filter: none;
+      border-radius: 0;
+    }
+  }
+  @media (min-width: 640px) and (max-width: 959px) {
+    .hero-content-container {
+      /* Smooth interpolation from 100px (960px) to 20px (640px) */
+      --left-rate: calc((100 - 20) / (var(--screen-mid-high) - var(--screen-mid-low)));
+      left: calc(20px + var(--left-rate) * (100vw - var(--screen-mid-low) * 1px));
+    }
+  }
+  @media (max-width: 639px) {
+    .hero-content-container {
+      left: 20px;
+    }
+  }
+
+  /* --- Fluid Text and Button Styles --- */
+  .hero-heading {
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(20.2px, 3.08vw, 59.25px);
+    line-height: 1.1;
+  }
+
+  .hero-description {
+    color: #e5e7eb;
+    font-size: clamp(12px, 1.25vw, 23.98px);
+    line-height: 1.333;
+    margin-top: clamp(8px, 2.5vw, 24px);
+    margin-bottom: clamp(16px, 4vw, 32px);
+  }
+
+  .hero-button {
+    background-color: #e6512e;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    width: clamp(104px, 11.45vw, 220px);
+    height: clamp(26px, 2.7vw, 52px);
+    border-radius: clamp(2px, 0.2vw, 4px);
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    /* 
+      
+      1. По умолчанию используем прежний clamp для большинства размеров.
+      2. В диапазоне 850px-1920px делаем уменьшение шрифта чуть быстрее, 
+         но не позволяем ему вылезать за границы кнопки.
+      3. Используем media queries для точного контроля.
+    */
+    font-size: clamp(10px, 1.25vw, 20px);
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (min-width: 850px) and (max-width: 1920px) {
+    .hero-button {
+      /* 
+        Здесь увеличиваем скорость уменьшения шрифта относительно ширины кнопки.
+        1.25vw → 1.05vw (быстрее уменьшается)
+        Минимум не меняем, максимум не меняем.
+      */
+      font-size: clamp(10px, 1.05vw, 20px);
+    }
+  }
+
+  @media (max-width: 849px) {
+    .hero-button {
+      /* 
+        Возвращаем прежний темп уменьшения, чтобы на малых экранах не было проблем.
+      */
+      font-size: clamp(10px, 1.25vw, 20px);
+    }
+  }
+
+  /* --- Fluid Navigation --- */
+  .hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(30px, 2.5vw, 48px);
+    height: clamp(30px, 2.5vw, 48px);
+    font-size: clamp(12px, 1.25vw, 16px);
+  }
+  
+  .hero-arrow-left { left: clamp(23px, 10.5vw, 194px); }
+  .hero-arrow-right { right: clamp(23px, 10.5vw, 194px); }
+
+  .hero-pagination {
+    position: absolute;
+    display: flex;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: clamp(20px, 8.3vw, 150px);
+    gap: clamp(8px, 1.56vw, 19px);
+  }
+  
+  .hero-dot {
+    border-radius: 50%;
+    background-color: #38281f;
+    width: clamp(5px, 0.88vw, 11.5px);
+    height: clamp(5px, 0.88vw, 11.5px);
+  }
+  .hero-dot.active { background-color: #e6512e; }
+
+  /* --- Fluid Scroll Indicator --- */
+  .hero-scroll-indicator {
+    position: absolute;
+    color: #fff;
+    right: clamp(24px, 10vw, 133px);
+    /* Use a fixed vertical position, responsive only to screen height */
+    bottom: clamp(100px, 12vh, 188px);
+    opacity: 1;
+    transition: opacity 0.4s var(--ease-out-quart);
+    z-index: 10; /* Lower than sidebar, higher than background. Adjust as needed. */
+    pointer-events: none; /* Prevent accidental hover/clicks under header */
+  }
+
+  @media (max-width: 639px) {
+    .hero-scroll-indicator {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  .hero-scroll-indicator p {
+    font-size: clamp(8.7px, 1.25vw, 17.47px);
+    margin-bottom: 8px;
+  }
+  .scroll-line {
+    position: relative;
+    background-color: #38281f;
+    width: clamp(1px, 0.1vw, 2px);
+    height: clamp(30px, 3.125vw, 61px);
+    margin: 0;
+  }
+  .scroll-line-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #e6512e;
+    width: clamp(1.3px, 0.14vw, 2.7px);
+    height: clamp(14px, 1.5vw, 29px);
+  }
+</style>

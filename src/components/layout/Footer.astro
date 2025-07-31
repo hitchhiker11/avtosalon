@@ -1,0 +1,341 @@
+---
+// src/components/layout/Footer.astro
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="content-wrapper">
+      <div class="footer-column info-column">
+        <div class="logo-section">
+          <img src="/images/Logo.png" alt="Логотип" class="logo-image" />
+          <span class="logo-text">ЧИСТЫЙ ВЫКУП</span>
+        </div>
+        <p class="description">
+          Эксклюзивный дилерский центр премиальных автомобилей, где роскошь
+          встречается с инновациями.
+        </p>
+        <div class="social-icons">
+          <a href="#" aria-label="Telegram" class="icon-wrapper"><img src="/images/footer-icons/telegram.svg" alt="Telegram" /></a>
+          <a href="#" aria-label="WhatsApp" class="icon-wrapper"><img src="/images/footer-icons/whatsapp.svg" alt="WhatsApp" /></a>
+          <a href="#" aria-label="VK" class="icon-wrapper"><img src="/images/footer-icons/vk.svg" alt="VK" /></a>
+          <a href="#" aria-label="Instagram" class="icon-wrapper"><img src="/images/footer-icons/instagram.svg" alt="Instagram" /></a>
+          <a href="#" aria-label="YouTube" class="icon-wrapper"><img src="/images/footer-icons/youtube.svg" alt="YouTube" /></a>
+        </div>
+      </div>
+      
+      <div class="footer-column nav-column">
+        <h4 class="column-title">Разделы сайта</h4>
+        <ul class="nav-list">
+          <li><a href="/">Главная</a></li>
+          <li><a href="#about">О нас</a></li>
+          <li><a href="#catalog">Каталог</a></li>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#location">Где мы находимся</a></li>
+          <li><a href="#reviews">Отзывы</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column contact-column">
+        <h4 class="column-title">Контакты</h4>
+        <ul class="contact-list">
+          <li>
+            <div class="icon-wrapper">
+              <img src="/images/footer-icons/location.svg" alt="Location" />
+            </div>
+            <span>Москва, ул. Василисы Кожиной, 13</span>
+          </li>
+          <li>
+            <div class="icon-wrapper">
+              <img src="/images/footer-icons/phone.svg" alt="Phone" />
+            </div>
+            <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+          </li>
+          <li>
+            <div class="icon-wrapper">
+              <img src="/images/footer-icons/email.svg" alt="Email" />
+            </div>
+            <a href="mailto:info@chistiyvikup.ru">info@chistiyvikup.ru</a>
+          </li>
+          <li>
+            <div class="icon-wrapper">
+              <img src="/images/footer-icons/clock.svg" alt="Clock" />
+            </div>
+            <span>Пн-Пт: 9:00 - 20:00<br />Сб: 10:00 - 18:00<br />Вс: 10:00 - 16:00</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <p class="copyright">© 2025 ЧИСТЫЙ ВЫКУП. Все права защищены.</p>
+      <div class="legal-links">
+        <a href="#">Политика конфиденциальности</a>
+        <a href="#">Условия использования</a>
+        <a href="#">Карта сайта</a>
+      </div>
+    </div>
+  </div>
+
+  <button id="scroll-to-top" class="scroll-to-top" aria-label="Наверх">
+    <img src="/images/footer-icons/arrow-up.svg" alt="Стрелка наверх" />
+  </button>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+    if (scrollToTopBtn) {
+      // Show/hide button based on scroll position
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          scrollToTopBtn.classList.add('visible');
+        } else {
+          scrollToTopBtn.classList.remove('visible');
+        }
+      });
+
+      // Smooth scroll to top
+      scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  :root {
+    --screen-min: 320;
+    --screen-mid-low: 640;
+    --screen-mid-high: 960;
+    --screen-max: 1920;
+  }
+
+  /* Main Styles */
+  .footer {
+    position: relative;
+    color: #fff;
+    background-color: #e6512e; /* Seamless gradient */
+    font-family: 'Inter', sans-serif;
+    padding-top: clamp(30px, calc(30px + (49 - 30) * ((100vw - 320px) / (1920 - 320))), 49px);
+    padding-bottom: clamp(30px, calc(30px + (49 - 30) * ((100vw - 320px) / (1920 - 320))), 49px);
+    margin-top: -1px; /* Removes the seam between sections */
+  }
+
+  .container {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding-left: clamp(20px, 10vw, 192px);
+    padding-right: clamp(20px, 10vw, 192px);
+  }
+
+  /* Content Wrapper */
+  .content-wrapper {
+    display: grid;
+    gap: clamp(40px, 4.16vw, 50px);
+  }
+
+  /* Columns */
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Info Column */
+  .logo-section {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 1.5vw, 24px);
+    margin-bottom: clamp(16px, 2.5vw, 24px);
+  }
+  .logo-image {
+    width: clamp(32px, 2.5vw, 40px);
+    height: clamp(32px, 2.5vw, 40px);
+  }
+  .logo-text {
+    font-weight: 700;
+    font-size: clamp(20px, 1.8vw, 24px);
+  }
+  .description {
+    font-size: clamp(14px, 1.25vw, 16px);
+    line-height: 1.6;
+    max-width: 340px;
+    margin-bottom: clamp(20px, 3vw, 30px);
+  }
+  .social-icons {
+    display: flex;
+    gap: clamp(16px, 1.5vw, 20px);
+  }
+  .social-icons .icon-wrapper {
+    width: clamp(20px, 2vw, 24px);
+    height: clamp(20px, 2vw, 24px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .social-icons img {
+    max-width: 100%;
+    height: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  /* Nav & Contact Columns */
+  .column-title {
+    font-weight: 700;
+    font-size: clamp(16px, 1.5vw, 18px);
+    margin-bottom: clamp(16px, 2.5vw, 24px);
+  }
+
+  .nav-list,
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 1.8vw, 16px);
+  }
+  .nav-list a,
+  .contact-list a {
+    color: #fff;
+    text-decoration: none;
+    font-size: clamp(14px, 1.2vw, 15px);
+    transition: color 0.3s;
+  }
+  .nav-list a:hover,
+  .contact-list a:hover {
+    color: #f0f0f0;
+    text-decoration: underline;
+  }
+  .contact-list li {
+    position: relative;
+    padding-left: 32px; /* Space for the icon + gap */
+    font-size: clamp(14px, 1.2vw, 15px);
+    line-height: 1.6;
+    display: flex; /* Use flex for vertical alignment of multi-line text */
+    align-items: flex-start;
+  }
+  .contact-list .icon-wrapper {
+    position: absolute;
+    left: 0;
+    /* Vertically center icon with the first line of text */
+    top: 0; 
+    height: 1.6em; /* Match line-height */
+    width: clamp(16px, 1.5vw, 18px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .contact-list img {
+    max-width: 100%;
+    height: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  /* Bottom Bar */
+  .bottom-bar {
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    padding-top: clamp(20px, 3vw, 30px);
+    margin-top: clamp(30px, 5.2vw, 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+    font-size: clamp(12px, 1.1vw, 14px);
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+  .legal-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .legal-links a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  /* Scroll To Top Button */
+  .scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #e6512e;
+    border: none;
+    border-radius: 50%;
+    width: clamp(40px, 4vw, 48px);
+    height: clamp(40px, 4vw, 48px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 50;
+  }
+  .scroll-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .scroll-to-top img {
+    width: clamp(16px, 1.8vw, 20px);
+    height: clamp(16px, 1.8vw, 20px);
+    filter: brightness(0) invert(1);
+  }
+
+  /* --- Layout Rules --- */
+
+  /* Mobile First: Single Column Layout by default */
+  .content-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .info-column, .nav-column, .contact-column {
+    grid-column: auto; /* Reset column span */
+  }
+
+  /* Tablet layout: info full-width, nav/contact 50/50 */
+  @media (min-width: 640px) and (max-width: 959px) {
+    .content-wrapper {
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(30px, 4vw, 40px);
+    }
+    .info-column {
+      grid-column: 1 / -1; /* Span full width */
+    }
+  }
+
+  /* Desktop layout: Three columns */
+  @media (min-width: 960px) {
+    .content-wrapper {
+      grid-template-columns: 1.5fr 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .bottom-bar {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  @media (min-width: 640px) {
+      .bottom-bar {
+          flex-direction: row;
+          justify-content: space-between;
+          text-align: left;
+      }
+  }
+
+</style> 

@@ -1,0 +1,313 @@
+---
+// src/components/ui/CarCard.astro
+export interface Props {
+  car: {
+    id: number;
+    brand: string;
+    model: string;
+    year: number;
+    mileage: string;
+    engineVolume: string;
+    horsePower: string;
+    fuelType: string;
+    price: string;
+    oldPrice?: string;
+    imageUrl: string;
+  };
+}
+
+const { car } = Astro.props;
+---
+
+<div class="car-card" data-brand={car.brand}>
+  <div class="car-card-background">
+    <div class="car-card-image-container">
+      <img src={car.imageUrl} alt={`${car.brand} ${car.model}`} class="car-card-image" />
+      <div class="car-card-year-badge">
+        <p>{car.year}</p>
+      </div>
+    </div>
+    <div class="car-card-info">
+      <div class="car-card-title-section">
+        <div class="car-card-title-mileage">
+          <h3>{car.brand}</h3>
+          <p>{car.mileage}</p>
+        </div>
+        <h4>{car.model}</h4>
+      </div>
+      <div class="car-card-specs">
+        <p>{car.engineVolume}</p>
+        <span>|</span>
+        <p>{car.horsePower}</p>
+        <span>|</span>
+        <p>{car.fuelType}</p>
+      </div>
+      <div class="car-card-price-section">
+        <p class="car-card-price">{car.price}</p>
+        {car.oldPrice && <p class="car-card-old-price">{car.oldPrice}</p>}
+      </div>
+    </div>
+  </div>
+  <button class="car-card-button">Подробнее</button>
+</div>
+
+<style>
+  .car-card {
+    --screen-min: 640; /* Start scaling from 640px */
+    --screen-max: 1920;
+
+    /* Fluid width: from 200px at 640px to 317.73px at 1920px */
+    --width-rate: calc((317.73 - 200) / (var(--screen-max) - var(--screen-min)));
+    width: calc(200px + var(--width-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+    max-width: 317.73px;
+    min-width: 200px;
+    
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Spacing between card and button */
+  }
+
+  .car-card-background {
+    background-color: #38281F;
+    /* Fluid border-radius: from 5.08px to 8.07px */
+    --br-rate: calc((8.07 - 5.08) / (var(--screen-max) - var(--screen-min)));
+    border-radius: calc(5.08px + var(--br-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+    
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Make background fill the card height */
+    
+    /* Fluid gap: from 10px to 15.89px */
+    --gap-rate: calc((15.89 - 10) / (var(--screen-max) - var(--screen-min)));
+    gap: calc(10px + var(--gap-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+    padding-bottom: calc(10px + var(--gap-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+  }
+
+  .car-card-image-container {
+    position: relative;
+    /* Fluid height: from 133px to 211.29px */
+    --height-rate: calc((211.29 - 133) / (var(--screen-max) - var(--screen-min)));
+    height: calc(133px + var(--height-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+  }
+
+  .car-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Match border-radius with parent */
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+
+  .car-card-year-badge {
+    position: absolute;
+    /* Fluid top: from 13px to 20.65px */
+    --top-rate: calc((20.65 - 13) / (var(--screen-max) - var(--screen-min)));
+    top: calc(13px + var(--top-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+
+    /* Fluid right: from 8px to 12.83px */
+    --right-rate: calc((12.83 - 8) / (var(--screen-max) - var(--screen-min)));
+    right: calc(8px + var(--right-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+
+    background-color: rgba(230, 81, 46, 0.72);
+
+    /* Fluid blur: from 7.52px to 11.94px */
+    --blur-rate: calc((11.94 - 7.52) / (var(--screen-max) - var(--screen-min)));
+    backdrop-filter: blur(calc(7.52px + var(--blur-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px)));
+
+    /* Fluid border-radius: from 3.71px to 5.9px */
+    --badge-br-rate: calc((5.9 - 3.71) / (var(--screen-max) - var(--screen-min)));
+    border-radius: calc(3.71px + var(--badge-br-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+
+    /* Fluid padding: from 6.5px 11.14px to 10.32px 17.7px */
+    --py-rate: calc((10.32 - 6.5) / (var(--screen-max) - var(--screen-min)));
+    --px-rate: calc((17.7 - 11.14) / (var(--screen-max) - var(--screen-min)));
+    padding: calc(6.5px + var(--py-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px)) 
+             calc(11.14px + var(--px-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+  }
+
+  .car-card-year-badge p {
+    color: #fff;
+    font-weight: 700;
+    /* Fluid font-size: from 11.07px to 17.58px */
+    --fs-rate: calc((17.58 - 11.07) / (var(--screen-max) - var(--screen-min)));
+    font-size: calc(11.07px + var(--fs-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+    line-height: 1.68;
+  }
+
+  .car-card-info {
+    display: flex;
+    flex-direction: column;
+    /* Fluid gap: from 5px to 7.94px */
+    --info-gap-rate: calc((7.94 - 5) / (var(--screen-max) - var(--screen-min)));
+    gap: calc(5px + var(--info-gap-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+
+    /* Fluid padding: from 10px to 15.89px */
+    --px-info-rate: calc((15.89 - 10) / (var(--screen-max) - var(--screen-min)));
+    padding: 0 calc(10px + var(--px-info-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+    flex-grow: 1; /* Allow info to fill available space */
+  }
+
+  .car-card-title-section,
+  .car-card-specs,
+  .car-card-price-section {
+    color: #fff;
+  }
+  
+  .car-card-title-mileage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .car-card-title-mileage h3,
+  .car-card-title-mileage p,
+  .car-card-title-section h4,
+  .car-card-specs p {
+    /* Fluid font-size: from 12.3px to 16px */
+    --fs-main-rate: calc((16 - 12.3) / (var(--screen-max) - var(--screen-min)));
+    font-size: calc(12.3px + var(--fs-main-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+    line-height: 1.45;
+  }
+
+  .car-card-title-mileage h3,
+  .car-card-title-mileage p {
+    font-weight: 700;
+  }
+
+  .car-card-title-section h4 {
+    font-weight: 400;
+  }
+  
+  .car-card-specs {
+    display: flex;
+    align-items: center;
+    /* Fluid gap: from 10px to 19.06px */
+    --spec-gap-rate: calc((19.06 - 10) / (var(--screen-max) - var(--screen-min)));
+    gap: calc(10px + var(--spec-gap-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+  }
+  
+  .car-card-price-section {
+      margin-top: auto; /* Pushes price to the bottom */
+  }
+
+  .car-card-price {
+    font-weight: 700;
+    /* Fluid font-size: from 16px to 25.42px */
+    --price-fs-rate: calc((25.42 - 16) / (var(--screen-max) - var(--screen-min)));
+    font-size: calc(16px + var(--price-fs-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+    line-height: 1.27;
+  }
+
+  .car-card-button {
+    /* Fluid height: from 34px to 54.01px */
+    --btn-h-rate: calc((54.01 - 34) / (var(--screen-max) - var(--screen-min)));
+    height: calc(34px + var(--btn-h-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+    max-height: 54.01px;
+    
+    border: 1px solid #E6512E;
+    
+    /* Fluid border-radius: from 2.23px to 3.54px */
+    --btn-br-rate: calc((3.54 - 2.23) / (var(--screen-max) - var(--screen-min)));
+    border-radius: calc(2.23px + var(--btn-br-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+    
+    background-color: transparent;
+    color: #fff;
+    font-weight: 400;
+    
+    /* Fluid font-size: from 14.44px to 22.94px */
+    --btn-fs-rate: calc((22.94 - 14.44) / (var(--screen-max) - var(--screen-min)));
+    font-size: calc(14.44px + var(--btn-fs-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
+    
+    line-height: 1.59;
+    cursor: pointer;
+    width: 100%; /* Make button full width of the card */
+  }
+
+  /* Lock styles below 640px */
+  @media (max-width: 639px) {
+    .car-card {
+      width: 200px;
+    }
+    .car-card-background {
+      border-radius: 5.08px;
+      gap: 10px;
+      padding-bottom: 10px;
+    }
+    .car-card-image-container {
+      height: 133px;
+    }
+    .car-card-year-badge {
+      top: 13px;
+      right: 8px;
+      backdrop-filter: blur(7.52px);
+      border-radius: 3.71px;
+      padding: 6.5px 11.14px;
+    }
+    .car-card-year-badge p,
+    .car-card-title-mileage h3,
+    .car-card-title-mileage p,
+    .car-card-title-section h4,
+    .car-card-specs p,
+    .car-card-price,
+    .car-card-button {
+      font-size: revert;
+    }
+     .car-card-year-badge p { font-size: 11.07px; }
+    .car-card-title-mileage h3,
+    .car-card-title-mileage p,
+    .car-card-title-section h4,
+    .car-card-specs p { font-size: 12.3px; }
+    .car-card-price { font-size: 16px; }
+    .car-card-button { font-size: 14.44px; }
+    
+    .car-card-info {
+        gap: 5px;
+        padding: 0 10px;
+    }
+    .car-card-specs {
+        gap: 10px;
+    }
+    .car-card-button {
+        height: 34px;
+        border-radius: 2.23px;
+    }
+  }
+
+  /* Ограничение роста карточки и шрифтов после 1920px */
+  @media (min-width: 1920px) {
+    .car-card {
+      width: 317.73px;
+    }
+    .car-card-background {
+      border-radius: 8.07px;
+      gap: 15.89px;
+      padding-bottom: 15.89px;
+    }
+    .car-card-image-container {
+      height: 211.29px;
+    }
+    .car-card-year-badge {
+      top: 20.65px;
+      right: 12.83px;
+      backdrop-filter: blur(11.94px);
+      border-radius: 5.9px;
+      padding: 10.32px 17.7px;
+    }
+    .car-card-year-badge p { font-size: 17.58px; }
+    .car-card-title-mileage h3,
+    .car-card-title-mileage p,
+    .car-card-title-section h4,
+    .car-card-specs p { font-size: 16px; }
+    .car-card-price { font-size: 25.42px; }
+    .car-card-button { font-size: 22.94px; height: 54.01px; border-radius: 3.54px; }
+    .car-card-info {
+      gap: 7.94px;
+      padding: 0 15.89px;
+    }
+    .car-card-specs {
+      gap: 19.06px;
+    }
+  }
+</style> 

@@ -1,0 +1,201 @@
+---
+// src/components/sections/AboutSection.astro
+---
+<section id="about">
+  <div class="container">
+    <div class="content-left">
+      <h2 class="title">О нашем автосалоне</h2>
+      <p class="description">
+        Чистый выкуп — это эксклюзивный салон премиальных автомобилей, где роскошь встречается с инновациями. 
+        Мы специализируемся на продаже и обслуживании автомобилей высшего класса, предлагая нашим клиентам непревзойденный уровень сервиса и внимания к деталям.
+      </p>
+      <p class="mission">
+        Наша миссия — создавать уникальный опыт владения автомобилем премиум-класса, обеспечивая безупречное качество на каждом этапе взаимодействия с клиентом. Мы не
+        просто продаем автомобили — мы воплощаем мечты о совершенстве в движении.
+      </p>
+      <div class="features">
+        <div class="feature-item">
+          <div class="icon-wrapper">
+            <img src="/images/feature-icon-1.svg" alt="Индивидуальный подход"/>
+          </div>
+          <div class="text-wrapper">
+            <h3 class="feature-title">Индивидуальный подход</h3>
+            <p class="feature-description">Персональный менеджер для каждого клиента</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="icon-wrapper">
+            <img src="/images/feature-icon-2.svg" alt="Премиальное качество"/>
+          </div>
+          <div class="text-wrapper">
+            <h3 class="feature-title">Премиальное качество</h3>
+            <p class="feature-description">Только лучшие автомобили</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="icon-wrapper">
+            <img src="/images/feature-icon-3.svg" alt="Сервисное обслуживание"/>
+          </div>
+          <div class="text-wrapper">
+            <h3 class="feature-title">Сервисное обслуживание</h3>
+            <p class="feature-description">Современный технический центр</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="icon-wrapper">
+            <img src="/images/feature-icon-4.svg" alt="Гарантия"/>
+          </div>
+          <div class="text-wrapper">
+            <h3 class="feature-title">Гарантия</h3>
+            <p class="feature-description">Расширенная гарантия на все автомобили</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-right">
+      <div class="image-container">
+        <img src="/images/about-background.png" alt="Интерьер автосалона" class="background-image"/>
+        <div class="badge">
+          <div class="badge-content">
+            <span class="badge-text-large">15+</span>
+            <div class="small-text-wrapper">
+                <span class="badge-text-small-let">лет</span>
+                <span class="badge-text-small-opyta">опыта</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --screen-min: 320;
+    --screen-mid-low: 640;
+    --screen-mid-high: 960;
+    --screen-max: 1920;
+    
+    --pad-left: clamp(20px, 5.2vw, 100px);
+    --pad-right: clamp(20px, 10.4vw, 200px);
+  }
+
+  #about {
+    background: #000;
+    padding: clamp(60px, 5.2vw, 100px) 0;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    overflow-x: clip;
+  }
+
+  .container {
+    max-width: 1920px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: clamp(30px, 4.16vw, 80px);
+    padding-left: var(--pad-left);
+    padding-right: var(--pad-right);
+  }
+  
+  @media (min-width: 640px) {
+    .container {
+      flex-direction: row-reverse;
+    }
+  }
+  @media (max-width: 639px) {
+    .container {
+      flex-direction: column;
+      gap: 0;
+      padding-left: 20px;
+      padding-right: clamp(32px, calc(32px + (40 - 32) * ((100vw - 320px) / (640 - 320))), 40px);
+    }
+  }
+
+  .content-left {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    flex-basis: clamp(296px, 30.8vw, 593px);
+  }
+
+  .title { font-weight: 700; line-height: 1.12; margin-bottom: clamp(40px, 3vw, 58px); font-size: 23.58px; }
+  @media (min-width: 640px) { .title { font-size: clamp(17.79px, calc(35.16px - 1.809vw), 23.58px); } }
+  @media (min-width: 960px) { .title { font-size: clamp(17.79px, 1.853vw, 35.58px); } }
+
+  .description, .mission { line-height: 1.45; color: #D1D5DB; margin-bottom: 20px; font-size: 13.25px; }
+  @media (min-width: 640px) { .description, .mission { font-size: clamp(10px, calc(19.75px - 1.016vw), 13.25px); } }
+  @media (min-width: 960px) { .description, .mission { font-size: clamp(10px, 1.042vw, 20px); } }
+
+  .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 50px 30px; margin-top: 58px; }
+  .feature-item { display: flex; align-items: flex-start; gap: 18px; }
+  .icon-wrapper { background: #38281F; border-radius: 8px; width: 54px; height: 54px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
+  .feature-title { font-weight: 700; line-height: 1.41; margin-bottom: 20px; font-size: clamp(9.92px, 1.033vw, 19.84px); }
+  .feature-description { line-height: 1.33; color: #D1D5DB; font-size: clamp(9px, 0.9375vw, 18px); }
+
+  @media (max-width: 959px) { .features { display: none; } }
+  
+  .content-right {
+    flex-grow: 1;
+    overflow: visible; 
+  }
+  @media (max-width: 639px) {
+    .content-right { 
+      width: 100%; 
+      margin-top: 20px;
+    }
+  }
+  
+  .image-container {
+    position: relative;
+    margin-left: calc(-1 * var(--pad-left));
+    width: auto;
+  }
+  @media (max-width: 639px) {
+    .image-container {
+      margin-left: 0;
+    }
+  }
+
+  .background-image { 
+    width: 100%; 
+    height: auto; 
+    display: block; 
+  }
+
+  .badge {
+    position: absolute;
+    bottom: clamp(5%, 8%, 8%);
+    right: clamp(10%, 17%, 17%);
+    width: clamp(49.54px, 5.93vw, 113.7px);
+    height: clamp(50.54px, 6.05vw, 116px);
+    background: #E6512E;
+    border-radius: clamp(3.49px, 0.42vw, 8px);
+    box-shadow: 0 clamp(3.49px, 0.42vw, 8px) clamp(4.36px, 0.52vw, 10px) clamp(-2.61px, -0.31vw, -6px) rgba(0, 0, 0, 0.1), 0 clamp(8.71px, 1.04vw, 20px) clamp(10.89px, 1.3vw, 25px) clamp(-2.18px, -0.26vw, -5px) rgba(0, 0, 0, 0.1);
+    padding: clamp(7.84px, 0.94vw, 18px) clamp(10px, 1.19vw, 24px) clamp(8.71px, 1.04vw, 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .badge-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #2A1B13;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    padding: clamp(7.84px, 0.94vw, 18px) clamp(10px, 1.19vw, 24px) clamp(8.71px, 1.04vw, 20px);
+  }
+  .small-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(2px, 0.24vw, 2px);
+  }
+  .badge-text-large { font-size: clamp(14.7px, 1.76vw, 33.75px); line-height: clamp(17.43px, 2.09vw, 40px); }
+  .badge-text-small-let { font-size: clamp(8.7px, 1.04vw, 20px); line-height: clamp(8.71px, 1.04vw, 20px); }
+  .badge-text-small-opyta { font-size: clamp(10px, 1.19vw, 15px); line-height: clamp(5.81px, 0.69vw, 8.71px); }
+
+</style> 
