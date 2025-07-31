@@ -177,7 +177,7 @@ const partners = [
     /* border-radius: 12px; */
     display: flex;
     flex-direction: column;
-    gap: clamp(90px, 1.25vw, 24px);
+    gap: clamp(20px, 1.25vw, 24px); /* Reduced from 90px to bring elements closer */
     color: #fff;
     overflow: hidden; /* Избегаем скролла */
   }
@@ -192,8 +192,15 @@ const partners = [
 
   .logo-container { height: clamp(40px, 4.16vw, 80px); display: flex; align-items: center; }
   .partner-logo { max-height: 100%; width: auto; }
-  .partner-name { font-size: clamp(10.27px, 1.8vw, 28.36px); font-weight: 700; text-transform: uppercase; line-height: 1.4; }
+  .partner-name { font-size: clamp(10.27px, 1.8vw, 28.36px); font-weight: 700; text-transform: uppercase; line-height: 1.4; margin-bottom: clamp(8px, 0.8vw, 12px); } /* Added margin-bottom for spacing */
   .partner-description { font-size: clamp(6.68px, 1.2vw, 18.43px); line-height: 1.6; color: #e5e7eb; letter-spacing: 0.02em; }
+  .partner-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Changed from space-between to flex-start */
+    gap: clamp(4px, 0.4vw, 8px); /* Small gap between title and description */
+  }
 
   .slider-scrollbar { width: 100%; height: 8px; background-color: #38281F; border-radius: 4px; margin-top: clamp(20px, 2.08vw, 40px); }
   .slider-scrollbar-thumb { height: 100%; background-color: #E6512E; border-radius: 4px; position: relative; left: 0; }
@@ -256,6 +263,10 @@ const partners = [
         /* Remove margin-left/right to prevent horizontal scroll */
         margin-left: 0; 
         margin-right: 0;
+    }
+    .slider-scrollbar {
+        margin-left: 20px;
+        margin-right: 20px;
     }
     .slider-track {
         padding-left: 0;

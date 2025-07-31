@@ -66,16 +66,16 @@
 
   .title {
     font-weight: 700;
-    line-height: 1.13;
-    font-size: clamp(23.58px, 1.85vw, 35.3px);
+    line-height: 1.1;
+    font-size: clamp(20.2px, 3.08vw, 59.25px);
     margin-bottom: clamp(15px, 1.56vw, 30px);
   }
 
   .subtitle {
     color: #D1D5DB;
-    line-height: 1.33;
+    line-height: 1.333;
     max-width: 1091px;
-    font-size: clamp(13.25px, 1.56vw, 30px);
+    font-size: clamp(12px, 1.25vw, 23.98px);
     margin-bottom: clamp(20px, 3.38vw, 65px);
   }
 
@@ -121,5 +121,35 @@
     color: #D1D5DB;
     line-height: 1.42;
     font-size: clamp(9.99px, 1.04vw, 20px);
+  }
+
+  /* Mobile typography standardization with 1.3x scaling */
+  @media (max-width: 639px) {
+    .title {
+      font-size: clamp(26.26px, 1.85vw, 35.3px); /* 20.2 * 1.3 = 26.26 (standardized with other sections) */
+      margin-bottom: clamp(19.5px, 1.56vw, 30px); /* 15 * 1.3 = 19.5 */
+    }
+    
+    .subtitle {
+      font-size: clamp(15.6px, 1.56vw, 30px); /* 12 * 1.3 = 15.6 (standardized with other sections) */
+      margin-bottom: clamp(26px, 3.38vw, 65px); /* 20 * 1.3 = 26 */
+    }
+    
+    .service-title {
+      font-size: clamp(23.13px, 1.23vw, 23.61px); /* 17.79 * 1.3 = 23.13 */
+    }
+    
+    .service-description {
+      font-size: clamp(12.99px, 1.04vw, 20px); /* 9.99 * 1.3 = 12.99 */
+    }
+    
+    .service-card {
+      padding: clamp(20.8px, 1.9vw, 37px) clamp(7.8px, 2.3vw, 45px); /* 16 * 1.3 = 20.8, 6 * 1.3 = 7.8 */
+      gap: clamp(15.6px, 1.6vw, 31px); /* 12 * 1.3 = 15.6 */
+    }
+    
+    .service-icon {
+      width: clamp(43.89px, 2.18vw, 42px); /* 33.76 * 1.3 = 43.89 */
+    }
   }
 </style> 

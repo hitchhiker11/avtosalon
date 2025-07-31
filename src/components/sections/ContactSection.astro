@@ -11,24 +11,24 @@
         <h3 class="form-title">Напишите нам</h3>
         <form class="contact-form">
           <div class="form-group">
-            <label for="name">Ваше имя</label>
-            <input type="text" id="name" placeholder="Иван Иванов">
+            <label for="name">Ваше имя*</label>
+            <input type="text" id="name" placeholder="Иван Иванов" required>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" placeholder="example@mail.ru">
           </div>
           <div class="form-group">
-            <label for="phone">Телефон</label>
-            <input type="tel" id="phone" placeholder="+7 (___) ___-__-__">
+            <label for="phone">Телефон*</label>
+            <input type="tel" id="phone" placeholder="+7 (___) ___-__-__" required>
           </div>
           <div class="form-group">
-            <label for="message">Сообщение</label>
-            <textarea id="message" placeholder="Ваш вопрос или комментарий"></textarea>
+            <label for="message">Сообщение*</label>
+            <textarea id="message" placeholder="Ваш вопрос или комментарий" required></textarea>
           </div>
           <div class="form-group checkbox-group">
-            <input type="checkbox" id="agreement">
-            <label for="agreement">Я согласен на обработку персональных данных</label>
+            <input type="checkbox" id="agreement" required>
+            <label for="agreement">* Я согласен на обработку персональных данных</label>
           </div>
           <button type="submit" class="submit-button">Отправить сообщение</button>
         </form>
@@ -65,16 +65,6 @@
             </div>
           </div>
         </div>
-        <div class="social-block">
-          <h4 class="social-title">Мы в социальных сетях</h4>
-          <div class="social-links">
-            <a href="#"><img src="/images/icons/telegram.svg" alt="Telegram"></a>
-            <a href="#"><img src="/images/icons/whatsapp.svg" alt="WhatsApp"></a>
-            <a href="#"><img src="/images/icons/vk.svg" alt="VK"></a>
-            <a href="#"><img src="/images/icons/instagram.svg" alt="Instagram"></a>
-            <a href="#"><img src="/images/icons/youtube.svg" alt="YouTube"></a>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -100,16 +90,16 @@
   }
 
   .section-title {
-    font-size: clamp(1.75rem, 1.0938rem + 1.75vw, 2.625rem); /* 28-42px */
+    font-size: clamp(20.2px, 3.08vw, 59.25px); /* Стандартизировано с header location */
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.1; /* Стандартизированная высота строки как в location */
     color: #fff;
-    margin-bottom: clamp(1rem, 0.5rem + 1.33vw, 1.625rem); /* 16-26px */
+    margin-bottom: clamp(8px, 0.83vw, 16px); /* Стандартизированный отступ как в location */
   }
 
   .section-subtitle {
-    font-size: clamp(1rem, 0.8125rem + 0.5vw, 1.25rem); /* 16-20px */
-    line-height: 1.5;
+    font-size: clamp(12px, 1.25vw, 23.98px); /* Стандартизировано с header location */
+    line-height: 1.333; /* Стандартизированная высота строки как в location */
     color: #D1D5DB;
   }
 
@@ -170,6 +160,7 @@
   .contact-form textarea {
     min-height: 128px;
     resize: vertical;
+    max-height: 250px;
   }
 
   .checkbox-group {
@@ -185,7 +176,8 @@
   }
 
   .submit-button {
-    padding: 12px;
+    display: inline-block;
+    padding: 12px 32px;
     background: transparent;
     border: 1px solid #fff;
     border-radius: 4px;
@@ -193,6 +185,11 @@
     font-size: clamp(0.875rem, 0.7813rem + 0.25vw, 1rem);
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s;
+    white-space: nowrap;
+    min-width: max-content;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
   }
 
   .submit-button:hover {
@@ -303,6 +300,74 @@
     .info-block {
       display: none;
     }
+    
+    /* Mobile typography standardization with 1.3x scaling */
+    .section-title {
+      font-size: clamp(1.64rem, 2vw, 3.7rem); /* Adjusted to match hero sizing pattern */
+      margin-bottom: clamp(1rem, 1.5vw, 1.625rem);
+    }
+    
+    .section-subtitle {
+      font-size: clamp(0.975rem, 1.2vw, 1.499rem); /* Adjusted to match hero sizing pattern */
+    }
+    
+    .form-title {
+      font-size: clamp(1.3rem, 1.5vw, 1.6875rem); /* Reduced from 1.625rem */
+    }
+    
+    .form-group label {
+      font-size: clamp(0.85rem, 1vw, 0.9375rem); /* Reduced from 1.056rem */
+    }
+    
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form input[type="tel"],
+    .contact-form textarea {
+      padding: 12px; /* Reduced from 15.6px */
+      font-size: clamp(0.9rem, 1.1vw, 1rem); /* Reduced from 1.138rem */
+    }
+    
+    .submit-button {
+      padding: 12px 24px; /* Reduced padding */
+      font-size: clamp(0.9rem, 1.1vw, 1rem); /* Reduced from 13px to match other form elements */
+      white-space: nowrap;
+    }
+    
+    .info-title {
+      font-size: clamp(1.625rem, 0.9375rem + 0.83vw, 1.6875rem); /* 1.25 * 1.3 = 1.625 */
+    }
+    
+    .info-item h4 {
+      font-size: clamp(1.219rem, 0.8438rem + 0.25vw, 1.0625rem); /* 0.9375 * 1.3 = 1.219 */
+    }
+    
+    .info-item p {
+      font-size: clamp(1.138rem, 0.7813rem + 0.25vw, 1rem); /* 0.875 * 1.3 = 1.138 */
+    }
+  }
+</style> 
+<script type="module">
+  import IMask from 'imask';
+
+  const form = document.querySelector('.contact-form');
+  const phoneInput = document.getElementById('phone');
+  const nameInput = document.getElementById('name');
+
+  if (phoneInput instanceof HTMLInputElement) {
+    const phoneMask = new IMask(phoneInput, {
+      mask: '+{7} (000) 000-00-00'
+    });
   }
 
-</style> 
+  if (nameInput instanceof HTMLInputElement) {
+    nameInput.addEventListener('input', () => {
+      nameInput.value = nameInput.value.replace(/\b\w/g, (l) => l.toUpperCase());
+    });
+  }
+
+  if (form instanceof HTMLFormElement) {
+    form.addEventListener('submit', (e) => {
+      // ...логика валидации...
+    });
+  }
+</script> 

@@ -119,13 +119,31 @@
     flex-basis: clamp(296px, 30.8vw, 593px);
   }
 
-  .title { font-weight: 700; line-height: 1.12; margin-bottom: clamp(40px, 3vw, 58px); font-size: 23.58px; }
-  @media (min-width: 640px) { .title { font-size: clamp(17.79px, calc(35.16px - 1.809vw), 23.58px); } }
-  @media (min-width: 960px) { .title { font-size: clamp(17.79px, 1.853vw, 35.58px); } }
+  .title { 
+    font-weight: 700; 
+    line-height: 1.1;
+    margin-bottom: clamp(40px, 3vw, 58px); 
+    font-size: clamp(20.2px, 3.08vw, 59.25px);
+  }
 
-  .description, .mission { line-height: 1.45; color: #D1D5DB; margin-bottom: 20px; font-size: 13.25px; }
-  @media (min-width: 640px) { .description, .mission { font-size: clamp(10px, calc(19.75px - 1.016vw), 13.25px); } }
-  @media (min-width: 960px) { .description, .mission { font-size: clamp(10px, 1.042vw, 20px); } }
+  .description, .mission { 
+    line-height: 1.333;
+    color: #D1D5DB; 
+    margin-bottom: 20px; 
+    font-size: clamp(12px, 1.25vw, 23.98px);
+  }
+
+  /* Mobile typography standardization with 1.3x scaling */
+  @media (max-width: 639px) {
+    .title { 
+      font-size: clamp(26.26px, 3.08vw, 59.25px); /* Match hero heading pattern */
+      margin-bottom: clamp(40px, 3vw, 58px);
+    }
+    .description, .mission { 
+      font-size: clamp(15.6px, 1.25vw, 23.98px); /* Match hero description pattern */
+      margin-bottom: 20px;
+    }
+  }
 
   .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 50px 30px; margin-top: 58px; }
   .feature-item { display: flex; align-items: flex-start; gap: 18px; }

@@ -3,13 +3,13 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host 0.0.0.0",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "api": "json-server --watch public/api/db.json --port 3001 --host 0.0.0.0",
-    "dev:full": "npm run api & npm run dev"
+    "api": "json-server --watch public/api/db.json --port 3001",
+    "dev:full": "npm run api & npm run dev --host 0.0.0.0"
   },
   "dependencies": {
     "@astrojs/tailwind": "^6.0.2",
@@ -18,8 +18,10 @@
     "@types/node": "^24.1.0",
     "astro": "^5.12.4",
     "astro-icon": "^1.1.5",
+    "astro-tunnel": "^0.1.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "imask": "^7.6.1",
     "json-server": "^1.0.0-beta.3",
     "lucide-react": "^0.532.0",
     "tailwind-merge": "^3.3.1",

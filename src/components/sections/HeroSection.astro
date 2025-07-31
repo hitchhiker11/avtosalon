@@ -70,6 +70,35 @@
 </section>
 
 <script>
+  const heroSection = document.getElementById('hero');
+  const scrollLineInner = document.querySelector('.scroll-line-inner');
+
+  window.addEventListener('scroll', () => {
+    if (heroSection && scrollLineInner) {
+      const heroRect = heroSection.getBoundingClientRect();
+      
+      // Новая логика: заполнение пропорционально расстоянию от нижнего края hero до верха экрана
+      const heroBottom = heroRect.bottom;
+      const heroHeight = heroRect.height;
+      
+      // Начинаем заполнение когда низ hero виден, заканчиваем когда он полностью скрыт
+      let scrollPercent = 0;
+      
+      if (heroBottom > 0) {
+        // Hero ещё виден - полосочка не заполняется
+        scrollPercent = 0;
+      } else {
+        // Hero скрыт - вычисляем процент заполнения
+        // Делаем заполнение медленнее: используем только половину от пройденного расстояния
+        const distanceScrolled = Math.abs(heroBottom);
+        const maxDistance = heroHeight; // Полное заполнение после прокрутки на высоту hero
+        scrollPercent = Math.min(0.6, distanceScrolled / (maxDistance * 2)); // Максимум 60% и медленнее в 2 раза
+      }
+      
+      (scrollLineInner as HTMLElement).style.height = `${scrollPercent * 100}%`;
+    }
+  });
+
   document.addEventListener("DOMContentLoaded", () => {
     const arrows = document.querySelectorAll(".hero-arrow");
     const dots = document.querySelectorAll(".hero-dot");
@@ -217,6 +246,13 @@
     flex-direction: column;
     justify-content: center;
   }
+
+  /* Mobile adjustment for larger button */
+  @media (max-width: 639px) {
+    .hero-content-container {
+      height: calc(152.1px + var(--height-rate) * (100vw - var(--screen-min) * 1px)); /* 117 * 1.3 = 152.1 */
+    }
+  }
   
   /* Left positioning with smooth interpolation from 200px to 100px to 20px */
   @media (min-width: 960px) {
@@ -271,18 +307,35 @@
     padding: 0;
     border: none;
     cursor: pointer;
-    /* 
-      
-      1. По умолчанию используем прежний clamp для большинства размеров.
-      2. В диапазоне 850px-1920px делаем уменьшение шрифта чуть быстрее, 
-         но не позволяем ему вылезать за границы кнопки.
-      3. Используем media queries для точного контроля.
-    */
     font-size: clamp(10px, 1.25vw, 20px);
     line-height: 1.1;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: background-color 0.3s ease;
+  }
+
+  .hero-button:hover {
+    background-color: #d44926;
+  }
+
+  /* Mobile-specific 1.3x scaling for smaller screens */
+  @media (max-width: 639px) {
+    .hero-heading {
+      font-size: clamp(26.26px, 3.08vw, 59.25px); /* 20.2 * 1.3 = 26.26 */
+    }
+    
+    .hero-description {
+      font-size: clamp(15.6px, 1.25vw, 23.98px); /* 12 * 1.3 = 15.6 */
+      margin-top: clamp(10.4px, 2.5vw, 24px); /* 8 * 1.3 = 10.4 */
+      margin-bottom: clamp(20.8px, 4vw, 32px); /* 16 * 1.3 = 20.8 */
+    }
+    
+    .hero-button {
+      width: clamp(135.2px, 11.45vw, 220px); /* 104 * 1.3 = 135.2 */
+      height: clamp(33.8px, 2.7vw, 52px); /* 26 * 1.3 = 33.8 */
+      font-size: clamp(14px, 1.25vw, 20px); /* Increased from 13px to 14px */
+    }
   }
 
   @media (min-width: 850px) and (max-width: 1920px) {
@@ -364,20 +417,24 @@
   .hero-scroll-indicator p {
     font-size: clamp(8.7px, 1.25vw, 17.47px);
     margin-bottom: 8px;
+    text-align: center;
+    white-space: nowrap; /* Предотвращаем перенос текста */
   }
   .scroll-line {
     position: relative;
     background-color: #38281f;
     width: clamp(1px, 0.1vw, 2px);
-    height: clamp(30px, 3.125vw, 61px);
-    margin: 0;
+    height: clamp(50px, 5vw, 100px);
+    margin: 0 auto; /* Центрируем полосочку относительно текста */
   }
   .scroll-line-inner {
     position: absolute;
-    top: 0;
-    left: 0;
+    bottom: 0; /* Заполнение снизу вверх */
+    left: 50%; /* Центрируем относительно родителя */
+    transform: translateX(-50%); /* Точное центрирование */
     background-color: #e6512e;
     width: clamp(1.3px, 0.14vw, 2.7px);
-    height: clamp(14px, 1.5vw, 29px);
+    height: 0%; /* Начинаем с 0 */
+    transition: height 0.1s ease-out; /* Плавная анимация заполнения */
   }
 </style>

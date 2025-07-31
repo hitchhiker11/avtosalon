@@ -38,6 +38,9 @@ const { title, description = "Автосалон премиум-класса Ч�
     <title>{title}</title>
   </head>
   <body class="bg-gradient-dark text-white min-h-screen font-sans antialiased">
+    <div id="preloader" class="preloader">
+      <div class="loader"></div>
+    </div>
     <main>
       <slot />
     </main>
@@ -46,10 +49,13 @@ const { title, description = "Автосалон премиум-класса Ч�
     <style is:global>
       html {
         scroll-behavior: smooth;
+        background-color: #000; /* Ensure HTML also has black background */
       }
       
       body {
         background-attachment: fixed;
+        background-color: #000;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
       }
       
       /* Custom scrollbar */
@@ -58,11 +64,11 @@ const { title, description = "Автосалон премиум-класса Ч�
       }
       
       ::-webkit-scrollbar-track {
-        background: #1a1a1a;
+        background: #170D07;
       }
       
       ::-webkit-scrollbar-thumb {
-        background: #f97316;
+        background: #E6512E;
         border-radius: 4px;
       }
       
@@ -76,6 +82,43 @@ const { title, description = "Автосалон премиум-класса Ч�
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
       }
+
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.5s ease;
+      }
+      .loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #E6512E;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 2s linear infinite;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
     </style>
+    <script>
+      window.addEventListener('load', () => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+          preloader.style.opacity = '0';
+          setTimeout(() => {
+            preloader.style.display = 'none';
+          }, 500);
+        }
+      });
+    </script>
   </body>
 </html> 

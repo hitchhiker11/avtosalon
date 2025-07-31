@@ -7,7 +7,8 @@ const API_URL = import.meta.env.API_URL;
 
 let cars: CarCardProps['car'][] = [];
 try {
-  const response = await fetch(`${API_URL}/cars`);
+  console.log('API_URL', API_URL);
+  const response = await fetch(`http://127.0.0.1:3001/cars`);
   if (response.ok) {
     cars = await response.json();
   } else {
@@ -105,14 +106,14 @@ const brands = ["Все автомобили", "Mercedes-Benz", "BMW", "Audi", "
 
   .catalog-header h2 {
     font-weight: 700;
-    font-size: clamp(17.36px, 1.81vw, 34.73px);
-    line-height: 1.15;
+    font-size: clamp(20.2px, 3.08vw, 59.25px);
+    line-height: 1.1;
   }
 
   .catalog-header p {
     font-weight: 400;
-    font-size: clamp(15px, 1.56vw, 30px);
-    line-height: 1.33;
+    font-size: clamp(12px, 1.25vw, 23.98px);
+    line-height: 1.333;
     color: #D1D5DB;
   }
 
@@ -128,17 +129,21 @@ const brands = ["Все автомобили", "Mercedes-Benz", "BMW", "Audi", "
     background-color: #38281F;
     color: #fff;
     border: none;
-    border-radius: clamp(2.3px, 0.24vw, 4.6px);
+    border-radius: clamp(2px, 0.2vw, 4px); /* Standardized with hero button */
     padding: clamp(12px, 0.62vw, 23px) clamp(13px, 1.33vw, 25.58px);
     font-weight: 600;
-    font-size: clamp(8.7px, 0.91vw, 17.38px);
-    line-height: 1.59;
+    font-size: clamp(10px, 1.25vw, 20px); /* Standardized with hero button */
+    line-height: 1.1; /* Standardized line-height */
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
 
   .filter-button.active {
     background-color: #E6512E;
+  }
+
+  .filter-button:hover {
+    background-color: #4a342a;
   }
 
   .car-grid {
@@ -167,13 +172,41 @@ const brands = ["Все автомобили", "Mercedes-Benz", "BMW", "Audi", "
     background-color: #E6512E;
     color: #fff;
     border: none;
-    border-radius: clamp(2px, 0.21vw, 4px);
-    width: clamp(142.07px, 14.8vw, 284.17px);
-    height: clamp(26px, 2.71vw, 52px);
-    font-weight: 400;
-    font-size: clamp(8.44px, 0.88vw, 16.88px);
-    line-height: 1.66;
+    border-radius: clamp(2px, 0.2vw, 4px);
+    min-height: 45px;
+    padding: 0 clamp(20px, 2.08vw, 40px);
+    height: clamp(26px, 2.7vw, 52px);
+    font-weight: 600;
+    font-size: clamp(10px, 1.25vw, 20px);
+    line-height: 1.1;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    min-width: fit-content;
+  }
+
+  .view-all-button:hover {
+    background-color: #d44926;
+  }
+
+  /* Mobile typography standardization with 1.3x scaling */
+  @media (max-width: 639px) {
+    .catalog-header h2 {
+      font-size: clamp(26.26px, 3.08vw, 59.25px); /* 20.2 * 1.3 = 26.26 */
+    }
+    
+    .catalog-header p {
+      font-size: clamp(15.6px, 1.25vw, 23.98px); /* 12 * 1.3 = 15.6 */
+    }
+    
+    .filter-button {
+      padding: clamp(15.6px, 0.62vw, 23px) clamp(16.9px, 1.33vw, 25.58px); /* 12 * 1.3 = 15.6, 13 * 1.3 = 16.9 */
+      font-size: clamp(14px, 1.25vw, 20px); /* Unified with other mobile buttons */
+    }
+    
+    .view-all-button {
+      font-size: clamp(14px, 1.25vw, 20px); /* Unified with other mobile buttons */
+    }
   }
 
   @media (min-width: 960px) {
