@@ -3,9 +3,11 @@
 import CarCard from '../ui/CarCard.astro';
 import type { Props as CarCardProps } from '../ui/CarCard.astro';
 
+const API_URL = import.meta.env.API_URL;
+
 let cars: CarCardProps['car'][] = [];
 try {
-  const response = await fetch('http://83.222.17.127/:3001/cars');
+  const response = await fetch(`${API_URL}/cars`);
   if (response.ok) {
     cars = await response.json();
   } else {
