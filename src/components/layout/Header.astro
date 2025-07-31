@@ -23,7 +23,7 @@ import Button from '../ui/Button.astro';
 
     <div class="right-section">
       <a href="tel:+74951234567" class="phone-link">+7 (495) 123-45-67</a>
-      <button class="cta-button">Смотреть каталог</button>
+      <button class="cta-button" onclick="document.getElementById('catalog')?.scrollIntoView({behavior: 'smooth'})">Смотреть каталог</button>
     </div>
     
     <button id="mobile-menu-button" class="mobile-menu-button">
@@ -221,7 +221,7 @@ import Button from '../ui/Button.astro';
     display: flex;
     justify-content: center;
     flex-grow: 1;
-    gap: clamp(16px, 1.667vw, 32px);
+    gap: clamp(16px, 1.25vw, 24px); /* Было 1.667vw и 32px, стало 1.25vw и 24px */
     margin: 0 clamp(10px, 2.08vw, 40px);
     min-width: 0;
   }
@@ -264,7 +264,7 @@ import Button from '../ui/Button.astro';
   /* Специальные стили для phone-link */
   .phone-link {
     color: #fff;
-    background-color: #38281F;
+    background-color: none;
     width: clamp(104px, 9vw, 173px); /* Уменьшенная максимальная ширина */
     font-size: clamp(10px, 0.85vw, 16px); /* Более быстрое уменьшение шрифта */
   }

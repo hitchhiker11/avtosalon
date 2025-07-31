@@ -40,7 +40,7 @@ const brands = ["Все автомобили", "Mercedes-Benz", "BMW", "Audi", "
       <p class="error-message">Не удалось загрузить каталог. Пожалуйста, убедитесь, что API сервер запущен (npm run api) и попробуйте снова.</p>
     )}
   </div>
-  <button class="view-all-button">Смотреть все автомобили</button>
+  <button class="view-all-button" onclick="document.getElementById('contacts')?.scrollIntoView({behavior: 'smooth'})">Смотреть все автомобили</button>
 </section>
 
 <script>

@@ -42,7 +42,7 @@
         <p class="hero-description">
           Откройте для себя коллекцию автомобилей<br />премиум-класса
         </p>
-        <button class="hero-button">Смотреть каталог</button>
+        <button class="hero-button" onclick="document.getElementById('catalog')?.scrollIntoView({behavior: 'smooth'})">Смотреть каталог</button>
       </div>
     </div>
   </div>
@@ -70,36 +70,44 @@
 </section>
 
 <script>
-  const heroSection = document.getElementById('hero');
-  const scrollLineInner = document.querySelector('.scroll-line-inner');
-
-  window.addEventListener('scroll', () => {
-    if (heroSection && scrollLineInner) {
-      const heroRect = heroSection.getBoundingClientRect();
-      
-      // Новая логика: заполнение пропорционально расстоянию от нижнего края hero до верха экрана
-      const heroBottom = heroRect.bottom;
-      const heroHeight = heroRect.height;
-      
-      // Начинаем заполнение когда низ hero виден, заканчиваем когда он полностью скрыт
-      let scrollPercent = 0;
-      
-      if (heroBottom > 0) {
-        // Hero ещё виден - полосочка не заполняется
-        scrollPercent = 0;
-      } else {
-        // Hero скрыт - вычисляем процент заполнения
-        // Делаем заполнение медленнее: используем только половину от пройденного расстояния
-        const distanceScrolled = Math.abs(heroBottom);
-        const maxDistance = heroHeight; // Полное заполнение после прокрутки на высоту hero
-        scrollPercent = Math.min(0.6, distanceScrolled / (maxDistance * 2)); // Максимум 60% и медленнее в 2 раза
-      }
-      
-      (scrollLineInner as HTMLElement).style.height = `${scrollPercent * 100}%`;
-    }
-  });
-
   document.addEventListener("DOMContentLoaded", () => {
+    const heroSection = document.getElementById('hero');
+    const scrollLineInner = document.querySelector('.scroll-line-inner') as HTMLElement;
+    
+    console.log('Hero section found:', !!heroSection);
+    console.log('Scroll line inner found:', !!scrollLineInner);
+
+    function updateScrollIndicator() {
+      if (heroSection && scrollLineInner) {
+        const heroRect = heroSection.getBoundingClientRect();
+        const heroBottom = heroRect.bottom;
+        const heroHeight = heroRect.height;
+        
+        console.log('Hero bottom:', heroBottom, 'Hero height:', heroHeight);
+        
+        let scrollPercent = 0;
+        
+        // Заполнение начинается когда нижний край hero поднимается выше экрана
+        if (heroBottom <= 0) {
+          const distanceFromBottom = Math.abs(heroBottom);
+          const maxFillDistance = heroHeight * 1.5; // Уменьшил множитель для быстрее заполнения
+          scrollPercent = Math.min(1, distanceFromBottom / maxFillDistance);
+          
+          console.log('Distance from bottom:', distanceFromBottom, 'Max distance:', maxFillDistance, 'Scroll percent:', scrollPercent);
+        }
+        
+        scrollLineInner.style.height = `${scrollPercent * 100}%`;
+        console.log('Setting height to:', `${scrollPercent * 100}%`);
+      }
+    }
+
+    // Добавляем обработчик скролла
+    window.addEventListener('scroll', updateScrollIndicator);
+    
+    // Вызываем сразу для проверки
+    updateScrollIndicator();
+
+    // Остальная логика слайдера
     const arrows = document.querySelectorAll(".hero-arrow");
     const dots = document.querySelectorAll(".hero-dot");
     const scrollIndicator = document.getElementById("hero-scroll-indicator");
@@ -134,7 +142,6 @@
     });
 
     setInterval(showNextSlide, 5000);
-
   });
 </script>
 
