@@ -127,7 +127,7 @@
       //   balloonPanelMaxMapArea: 0
       // });
 
-      myMap.geoObjects.add(placemark);
+      // myMap.geoObjects.add(placemark);
 
       // Оптимизация поведений карты
       myMap.behaviors.disable('scrollZoom'); // Отключаем скролл карты колесиком мыши
@@ -404,11 +404,11 @@
     color: #fff;
     border: none;
     border-radius: clamp(2px, 0.2vw, 4px);
-    /* Исправляем размеры кнопки - делаем шире для текста */
-    width: clamp(180px, 18vw, 340px); /* Увеличено для размещения текста */
-    height: clamp(31.2px, 3.24vw, 62.4px);
+    /* Размеры как у cta-button из Header.astro, но с увеличенной шириной для большего пространства */
+    width: clamp(140px, 14vw, 280px); /* Увеличено для большего пространства от текста до границ */
+    height: clamp(26px, 2.7vw, 52px);
     font-weight: 600;
-    font-size: clamp(12px, 1.5vw, 24px);
+    font-size: clamp(10px, 1.05vw, 20px);
     line-height: 1.1;
     cursor: pointer;
     text-decoration: none;
@@ -493,16 +493,30 @@
     .route-button { margin-top: clamp(10px, 1.6vw, 16px); align-self: center; }
   }
 
-  /* Desktop (>=960px): центрируем правый блок info-right относительно грида */
+  /* Desktop (>=960px): в десктопе правый элемент должен быть посередине info-card */
   @media (min-width: 960px) {
-    .info-grid {
-      justify-content: center;
-      margin: 0 auto;
-      flex-grow: 0; /* Не растягиваем грид на всю ширину, держим его по центру */
-      width: max-content; /* Ширина по содержимому, чтобы грид легко центрировался */
+    .info-card {
+      justify-content: space-between;
+      align-items: center;
     }
-    .info-left { flex: 0 0 auto; }
-    .info-right { flex: 0 0 auto; }
+    
+    .info-grid {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: clamp(24px, 4.992vw, 96px);
+      flex-grow: 1;
+    }
+    
+    .info-left { 
+      flex: 0 0 auto;
+    }
+    
+    .info-right { 
+      flex: 0 0 auto;
+      align-self: center; /* Центрируем правый блок по вертикали */
+    }
   }
 
   /* Mobile Layout */
@@ -629,4 +643,4 @@
       white-space: nowrap;
     }
   }
-</style> 
+</style>
