@@ -116,18 +116,18 @@
         animationDuration: 100
       });
 
-      // // Добавляем метку на карту
-      // const placemark = new window.ymaps.Placemark([55.736184, 37.499875], {
-      //   balloonContent: 'Автосалон "ЧИСТЫЙ ВЫКУП"<br>Москва, ул. Василисы Кожиной, 13<br>+7 (495) 123-45-67',
-      //   hintContent: 'ЧИСТЫЙ ВЫКУП'
-      // }, {
-      //   preset: 'islands#redIcon',
-      //   // Отключаем анимацию для метки
-      //   hideIconOnBalloonOpen: false,
-      //   balloonPanelMaxMapArea: 0
-      // });
+      // Добавляем метку на карту
+      const placemark = new window.ymaps.Placemark([55.736184, 37.499875], {
+        balloonContent: 'Автосалон "ЧИСТЫЙ ВЫКУП"<br>Москва, ул. Василисы Кожиной, 13<br>+7 (495) 123-45-67',
+        hintContent: 'ЧИСТЫЙ ВЫКУП'
+      }, {
+        preset: 'islands#redIcon',
+        // Отключаем анимацию для метки
+        hideIconOnBalloonOpen: false,
+        balloonPanelMaxMapArea: 0
+      });
 
-      // myMap.geoObjects.add(placemark);
+      myMap.geoObjects.add(placemark);
 
       // Оптимизация поведений карты
       myMap.behaviors.disable('scrollZoom'); // Отключаем скролл карты колесиком мыши
