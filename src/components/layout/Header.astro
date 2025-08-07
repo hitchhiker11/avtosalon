@@ -65,15 +65,15 @@ import Button from '../ui/Button.astro';
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     const isOpen = body.classList.toggle('menu-is-open');
 
-    if (isOpen) {
-        body.style.overflow = 'hidden';
-        body.style.paddingRight = `${scrollbarWidth}px`;
-        if (mainHeader) mainHeader.style.paddingRight = `${scrollbarWidth}px`;
-    } else {
-        body.style.overflow = 'auto';
-        body.style.paddingRight = '';
-        if (mainHeader) mainHeader.style.paddingRight = '';
-    }
+    // if (isOpen) {
+    //     // body.style.overflow = 'hidden';
+    //     body.style.paddingRight = `${scrollbarWidth}px`;
+    //     if (mainHeader) mainHeader.style.paddingRight = `${scrollbarWidth}px`;
+    // } else {
+    //     // body.style.overflow = 'auto';
+    //     body.style.paddingRight = '';
+    //     if (mainHeader) mainHeader.style.paddingRight = '';
+    // }
   };
 
   const closeMenu = () => {
@@ -264,10 +264,11 @@ import Button from '../ui/Button.astro';
   /* Специальные стили для phone-link */
   .phone-link {
     color: #fff;
-    background-color: none;
-    width: clamp(104px, 9vw, 173px); /* Уменьшенная максимальная ширина */
-    font-size: clamp(10px, 0.85vw, 16px); /* Более быстрое уменьшение шрифта */
+    background-color: transparent; /* Changed from none */
+    width: clamp(120px, 10vw, 190px); /* Increased width to fit larger font */
+    font-size: clamp(10px, 1.05vw, 20px);
   }
+  
   .phone-link:hover {
     background-color: #4a342a;
   }

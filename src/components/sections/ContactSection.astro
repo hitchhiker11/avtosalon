@@ -8,6 +8,17 @@
     </div>
     <div class="content-wrapper">
       <div class="form-container">
+        <!-- Social links for mobile (move inside form-container, before form) -->
+        <div class="social-links-container mobile-only">
+          <h3 class="social-title">Мы в социальных сетях</h3>
+          <div class="social-icons">
+            <a href="#" aria-label="Telegram" class="icon-wrapper"><img src="/images/contact-icons/mobile/telegram.svg" alt="Telegram" /></a>
+            <a href="#" aria-label="WhatsApp" class="icon-wrapper"><img src="/images/contact-icons/mobile/whatsapp.svg" alt="WhatsApp" /></a>
+            <a href="#" aria-label="VK" class="icon-wrapper"><img src="/images/contact-icons/mobile/vk.svg" alt="VK" /></a>
+            <a href="#" aria-label="Instagram" class="icon-wrapper"><img src="/images/contact-icons/mobile/instagram.svg" alt="Instagram" /></a>
+            <a href="#" aria-label="YouTube" class="icon-wrapper"><img src="/images/contact-icons/mobile/youtube.svg" alt="YouTube" /></a>
+          </div>
+        </div>
         <h3 class="form-title">Напишите нам</h3>
         <form class="contact-form">
           <div class="form-group">
@@ -63,6 +74,17 @@
               <h4>Режим работы</h4>
               <p>Пн-Пт: 9:00 - 20:00<br>Сб: 10:00 - 18:00<br>Вс: 10:00 - 16:00</p>
             </div>
+          </div>
+        </div>
+        <!-- Social links for desktop -->
+        <div class="social-links-container desktop-only">
+          <h3 class="social-title">Мы в социальных сетях</h3>
+          <div class="social-icons">
+            <a href="#" aria-label="Telegram" class="icon-wrapper"><img src="/images/footer-icons/telegram.svg" alt="Telegram" /></a>
+            <a href="#" aria-label="WhatsApp" class="icon-wrapper"><img src="/images/footer-icons/whatsapp.svg" alt="WhatsApp" /></a>
+            <a href="#" aria-label="VK" class="icon-wrapper"><img src="/images/footer-icons/vk.svg" alt="VK" /></a>
+            <a href="#" aria-label="Instagram" class="icon-wrapper"><img src="/images/footer-icons/instagram.svg" alt="Instagram" /></a>
+            <a href="#" aria-label="YouTube" class="icon-wrapper"><img src="/images/footer-icons/youtube.svg" alt="YouTube" /></a>
           </div>
         </div>
       </div>
@@ -241,39 +263,50 @@
     line-height: 1.5;
   }
 
+  .social-links-container {
+    margin-bottom: 24px;
+  }
+
   .social-title {
-    font-size: clamp(0.9375rem, 0.8438rem + 0.25vw, 1.0625rem);
+    font-size: clamp(1.25rem, 0.9375rem + 0.83vw, 1.6875rem); /* 20-27px */
     font-weight: 700;
     color: #fff;
     margin-bottom: 16px;
   }
 
-  .social-links {
+  .social-icons {
     display: flex;
     gap: 16px;
   }
 
-  .social-links a {
+  .social-icons .icon-wrapper {
+    width: 20px;
+    height: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
-    background: #E6512E;
-    border-radius: 50%;
-    transition: transform 0.3s;
-  }
-  
-  .social-links a:hover {
-      transform: scale(1.1);
   }
 
-  .social-links img {
-    height: clamp(0.875rem, 0.75rem + 0.33vw, 1.0625rem); /* 14-17px */
+  .social-icons img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+  .mobile-only {
+    display: block;
   }
 
   /* Responsive Adjustments */
   @media (min-width: 960px) {
+    .desktop-only {
+      display: block;
+    }
+    .mobile-only {
+      display: none;
+    }
     .container {
       /* 
         This dynamically calculates padding to match the form width to the design: 
@@ -282,11 +315,17 @@
       */
       padding: 0 clamp(10.27rem, 17.11vw, 20.54rem);
     }
+    .social-icons .icon-wrapper {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   @media (max-width: 960px) {
     .content-wrapper {
       flex-direction: column;
+      background: transparent;
+      backdrop-filter: none;
     }
     .info-container {
       max-width: 100%;
@@ -296,9 +335,16 @@
   @media (max-width: 640px) {
     .content-wrapper {
       flex-direction: column-reverse;
+      background: transparent;
+      backdrop-filter: none;
     }
     .info-block {
       display: none;
+    }
+    
+    .social-icons .icon-wrapper {
+      width: 30px;
+      height: 30px;
     }
     
     /* Mobile typography standardization with 1.3x scaling */

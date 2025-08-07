@@ -3,7 +3,7 @@
 ---
 <section id="hero" class="relative w-full overflow-hidden">
   <!-- Background Image and Gradient -->
-  <div class="absolute inset-0 z-0">
+  <div class="absolute inset-0 z-0 mt-10">
     <picture>
       <!-- Desktop Wide (1920px) -->
       <source
@@ -80,24 +80,8 @@
     function updateScrollIndicator() {
       if (heroSection && scrollLineInner) {
         const heroRect = heroSection.getBoundingClientRect();
-        const heroBottom = heroRect.bottom;
-        const heroHeight = heroRect.height;
-        
-        console.log('Hero bottom:', heroBottom, 'Hero height:', heroHeight);
-        
-        let scrollPercent = 0;
-        
-        // Заполнение начинается когда нижний край hero поднимается выше экрана
-        if (heroBottom <= 0) {
-          const distanceFromBottom = Math.abs(heroBottom);
-          const maxFillDistance = heroHeight * 1.5; // Уменьшил множитель для быстрее заполнения
-          scrollPercent = Math.min(1, distanceFromBottom / maxFillDistance);
-          
-          console.log('Distance from bottom:', distanceFromBottom, 'Max distance:', maxFillDistance, 'Scroll percent:', scrollPercent);
-        }
-        
+        const scrollPercent = Math.min(1, Math.max(0, 1 - (heroRect.bottom / window.innerHeight)));
         scrollLineInner.style.height = `${scrollPercent * 100}%`;
-        console.log('Setting height to:', `${scrollPercent * 100}%`);
       }
     }
 
@@ -186,7 +170,9 @@
   @media (max-width: 639px) {
     #hero {
       --height-rate: calc((440 - 369) / (var(--screen-mid-low) - var(--screen-min)));
-      height: calc(369px + var(--height-rate) * (100vw - var(--screen-min) * 1px));
+      /* Add small extra height to compensate button growth pushing content */
+      --mobile-extra: 10px;
+      height: calc(369px + var(--height-rate) * (100vw - var(--screen-min) * 1px) + var(--mobile-extra));
     }
   }
   
@@ -339,9 +325,14 @@
     }
     
     .hero-button {
-      width: clamp(135.2px, 11.45vw, 220px); /* 104 * 1.3 = 135.2 */
-      height: clamp(33.8px, 2.7vw, 52px); /* 26 * 1.3 = 33.8 */
-      font-size: clamp(14px, 1.25vw, 20px); /* Increased from 13px to 14px */
+      width: clamp(175.76px, 11.45vw, 220px);
+      height: clamp(43.94px, 2.7vw, 52px);
+      font-size: clamp(14px, 1.25vw, 20px);
+    }
+
+    /* When button is larger on mobile, nudge the image slightly down by the same extra */
+    .hero-image {
+      top: calc(131px + var(--top-rate) * (100vw - var(--screen-min) * 1px) + var(--mobile-extra));
     }
   }
 
@@ -353,15 +344,6 @@
         Минимум не меняем, максимум не меняем.
       */
       font-size: clamp(10px, 1.05vw, 20px);
-    }
-  }
-
-  @media (max-width: 849px) {
-    .hero-button {
-      /* 
-        Возвращаем прежний темп уменьшения, чтобы на малых экранах не было проблем.
-      */
-      font-size: clamp(10px, 1.25vw, 20px);
     }
   }
 
@@ -442,6 +424,6 @@
     background-color: #e6512e;
     width: clamp(1.3px, 0.14vw, 2.7px);
     height: 0%; /* Начинаем с 0 */
-    transition: height 0.1s ease-out; /* Плавная анимация заполнения */
+    transition: height 0.2s ease-out; /* Плавная анимация заполнения */
   }
 </style>
