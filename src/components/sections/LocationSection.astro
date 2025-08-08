@@ -533,17 +533,20 @@
     }
 
     .map-wrapper {
-      min-height: clamp(260px, 36vh, 460px);
+      /* Reduce the map height by exactly 20% on mobile */
+      min-height: clamp(208px, 28.8vh, 368px);
     }
 
     #map {
-      min-height: clamp(260px, 36vh, 460px);
+      /* Map element follows the reduced height */
+      min-height: clamp(208px, 28.8vh, 368px);
       /* Return border-radius on mobile */
       border-radius: 8px 8px 0 0;
     }
 
     .map-fallback {
-      min-height: clamp(260px, 36vh, 460px);
+      /* Fallback image matches the new reduced map height */
+      min-height: clamp(208px, 28.8vh, 368px);
       border-radius: 8px 8px 0 0;
     }
     

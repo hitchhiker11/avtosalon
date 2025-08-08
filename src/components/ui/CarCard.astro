@@ -179,7 +179,7 @@ const { car } = Astro.props;
   .car-card-title-section h4 {
     font-weight: 400;
   }
-  
+
   .car-card-specs {
     display: flex;
     align-items: center;
@@ -187,7 +187,7 @@ const { car } = Astro.props;
     --spec-gap-rate: calc((19.06 - 10) / (var(--screen-max) - var(--screen-min)));
     gap: calc(10px + var(--spec-gap-rate) * (min(100vw, 1920px) - var(--screen-min) * 1px));
   }
-  
+
   .car-card-price-section {
       margin-top: auto; /* Pushes price to the bottom */
   }
@@ -222,7 +222,12 @@ const { car } = Astro.props;
     
     line-height: 1.59;
     cursor: pointer;
-    width: 100%; /* Make button full width of the card */
+    width: 100%;
+    transition: background-color 0.2s ease;
+  }
+
+  .car-card-button:hover {
+    background-color: rgba(230, 81, 46, 0.1);
   }
 
   /* Lock styles below 640px */
